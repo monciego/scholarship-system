@@ -1,6 +1,6 @@
 {{-- mobile --}}
 
-<div :class="{'block': openSidebar, 'hidden': ! openSidebar}" class="fixed inset-0 flex z-40 hidden" role="dialog"
+<div :class="{'flex': openSidebar, 'hidden': ! openSidebar}" class="fixed inset-0 z-40 hidden" role="dialog"
     aria-modal="true">
     <div @click="openSidebar = false" class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
 
