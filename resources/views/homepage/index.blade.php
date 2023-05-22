@@ -18,10 +18,13 @@
         <div class="bg-gray-800">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
                 <h2
-                    class="font-montserrat text-center text-gray-50 text-lg md:text-2xl lg:text-3xl font-semibold uppercase tracking-wide">
+                    class="font-montserrat mb-20 text-center text-gray-50 text-lg md:text-2xl lg:text-3xl font-semibold uppercase tracking-wide">
                     Available Scholarships
                 </h2>
                 <!-- Scholarship card goes here -->
+                <div class="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8">
+                    @include('partials.scholarship-card')
+                </div>
             </div>
         </div>
     </div>
