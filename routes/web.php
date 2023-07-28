@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -32,6 +33,12 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], function() {
+    Route::get('register-representative-account', [RegisteredRepresentativeController::class, 'create'])
+                ->name('register.representative');
+    Route::post('register-representative-account', [RegisteredRepresentativeController::class, 'store']);
 });
 
 

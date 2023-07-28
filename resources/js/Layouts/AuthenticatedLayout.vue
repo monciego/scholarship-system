@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from "vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/vue3";
+import DangerMessage from "@/Components/DangerMessage.vue";
+import SuccessMessage from "@/Components/SuccessMessage.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -89,7 +90,6 @@ const showingNavigationDropdown = ref(false);
         </div>
 
         <!-- mobile navigation -->
-
         <div
             :class="{
                 flex: showingNavigationDropdown,
@@ -194,7 +194,7 @@ const showingNavigationDropdown = ref(false);
                 </Link>
 
                 <div class="flex-1 flex flex-col overflow-y-auto">
-                    <nav class="flex-1 px-2 py-4 space-y-1">
+                    <nav class="flex-1 px-2 py-4 space-y-2">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <NavLink
                             :href="route('dashboard')"
@@ -217,6 +217,27 @@ const showingNavigationDropdown = ref(false);
                             </svg>
                             Dashboard
                         </NavLink>
+                        <NavLink
+                            v-if="$page.props.role.admin"
+                            :href="route('register.representative')"
+                            :active="route().current('register.representative')"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="text-gray-300 mr-3 flex-shrink-0 h-6 w-6"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                                />
+                            </svg>
+                            Register Representative
+                        </NavLink>
                     </nav>
                 </div>
             </div>
@@ -227,6 +248,8 @@ const showingNavigationDropdown = ref(false);
             <div class="max-w-7xl md:ml-64 mx-auto px-4 sm:px-6 md:px-8">
                 <!-- Replace with your content -->
                 <div class="py-4">
+                    <SuccessMessage />
+                    <DangerMessage />
                     <slot />
                 </div>
                 <!-- /End replace -->
