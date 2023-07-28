@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScholarshipController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,6 +40,10 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
     Route::get('register-representative-account', [RegisteredRepresentativeController::class, 'create'])
                 ->name('register.representative');
     Route::post('register-representative-account', [RegisteredRepresentativeController::class, 'store']);
+});
+
+Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {
+    Route::resource('scholarship', ScholarshipController::class);
 });
 
 

@@ -15,7 +15,9 @@ import SidebarHeader from "@/Components/SidebarHeader.vue";
                 <div class="py-4">
                     <SuccessMessage />
                     <DangerMessage />
-                    <slot />
+                    <div class="pt-10">
+                        <slot />
+                    </div>
                 </div>
             </div>
         </main>
