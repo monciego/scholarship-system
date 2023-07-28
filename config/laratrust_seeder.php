@@ -16,6 +16,9 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u',
         ],
+        'representative' => [
+            'profile' => 'r,u',
+        ],
         'user' => [
             'profile' => 'r,u',
         ],
