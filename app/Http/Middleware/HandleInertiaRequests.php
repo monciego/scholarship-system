@@ -36,7 +36,6 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-
             'role' => [
                 'admin' => Auth::check() ? Auth::user()->hasRole('administrator') : false,
                 'representative' => Auth::check() ?  Auth::user()->hasRole('representative')  : false,
@@ -47,6 +46,10 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'flash' => [
+                'success' => session('success'),
+                'danger' => session('danger'),
+            ]
         ]);
     }
 }

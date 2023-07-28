@@ -47,8 +47,6 @@ class RegisteredRepresentativeController extends Controller
 
         event(new Registered($user));
 
-        // Auth::login($user);
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Representative Account Created Successfully');
     }
 }

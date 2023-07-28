@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from "vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/vue3";
+import DangerMessage from "@/Components/DangerMessage.vue";
+import SuccessMessage from "@/Components/SuccessMessage.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -89,7 +90,6 @@ const showingNavigationDropdown = ref(false);
         </div>
 
         <!-- mobile navigation -->
-
         <div
             :class="{
                 flex: showingNavigationDropdown,
@@ -248,6 +248,8 @@ const showingNavigationDropdown = ref(false);
             <div class="max-w-7xl md:ml-64 mx-auto px-4 sm:px-6 md:px-8">
                 <!-- Replace with your content -->
                 <div class="py-4">
+                    <SuccessMessage />
+                    <DangerMessage />
                     <slot />
                 </div>
                 <!-- /End replace -->
