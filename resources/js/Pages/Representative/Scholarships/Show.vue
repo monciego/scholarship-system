@@ -2,6 +2,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { PaperClipIcon } from "@heroicons/vue/20/solid";
 import { Head, Link } from "@inertiajs/vue3";
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(LocalizedFormat);
 defineProps(["scholarship"]);
 </script>
 <template>
@@ -81,15 +85,16 @@ defineProps(["scholarship"]);
                         class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                     >
                         <dt class="text-sm font-medium leading-6 text-gray-900">
-                            Salary expectation
+                            Deadline
                         </dt>
                         <dd
                             class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"
                         >
-                            $120,000
+                            {{ dayjs(scholarship.deadlineAt).format("LL") }}
                         </dd>
                     </div>
                     <div
+                        v-if="scholarship.applicationLink !== null"
                         class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                     >
                         <dt class="text-sm font-medium leading-6 text-gray-900">
