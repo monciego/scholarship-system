@@ -5,6 +5,9 @@ import Hero from "./partials/Hero.vue";
 import HeroImage from "./partials/HeroImage.vue";
 import BackgroundPattern from "./partials/BackgroundPattern.vue";
 import ScholarshipCard from "../../Shared/ScholarshipCard.vue";
+import { Head } from "@inertiajs/vue3";
+
+defineProps(["scholarships"]);
 </script>
 
 <template>
@@ -33,7 +36,7 @@ import ScholarshipCard from "../../Shared/ScholarshipCard.vue";
                 <div
                     class="grid grid-cols-1 lg:grid-cols-3 gap-y-16 lg:gap-x-8"
                 >
-                    <ScholarshipCard />
+                    <ScholarshipCard :scholarships="scholarships" />
                 </div>
             </div>
         </div>

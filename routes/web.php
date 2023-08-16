@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScholarshipController;
+use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,11 +21,14 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $now = date("Y-m-d");
+
     return Inertia::render('Homepage/Homepage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'scholarships' => Scholarship::where('deadlineAt', '>=', $now)->where('status', '=', 'available')->orWhere('status','onHold')->with('representative')->latest()->get()
     ]);
 });
 
