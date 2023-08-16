@@ -1,6 +1,24 @@
+<script setup>
+defineProps(["scholarships"]);
+
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(LocalizedFormat);
+</script>
+
 <template>
-    <div class="flex flex-col bg-white rounded-2xl shadow-xl">
-        <div class="flex-1 relative pt-16 px-6 pb-8 md:px-8">
+    <div
+        v-for="scholarship in scholarships"
+        :key="scholarship.id"
+        class="flex flex-col bg-white rounded-2xl shadow-xl"
+    >
+        <div class="flex-1 relative pt-16 px-6 pb-4 md:px-8">
+            <div
+                v-if="scholarship.status === 'onHold'"
+                class="bg-yellow-500 inline py-2 px-4 text-white rounded absolute top-4 right-4"
+            >
+                ON HOLD
+            </div>
             <div
                 class="absolute top-0 p-4 inline-block bg-indigo-600 rounded-xl shadow-lg transform -translate-y-1/2"
             >
@@ -20,11 +38,10 @@
                 </svg>
             </div>
             <h3 class="text-xl font-medium text-gray-900">
-                Academic Scholarship
+                {{ scholarship.scholarshipName }}
             </h3>
-            <p class="mt-4 mb-2 text-base text-gray-500">
-                Varius facilisi mauris sed sit. Non sed et duis dui leo,
-                vulputate id malesuada non. Cras aliquet purus dui laoreet...
+            <p class="mt-4 mb-2 line-clamp-3 text-base text-gray-500">
+                {{ scholarship.details }}
             </p>
             <a
                 href="#"
@@ -32,9 +49,26 @@
             >
                 More Details <span aria-hidden="true"> &rarr;</span>
             </a>
+
+            <div class="mt-2">
+                <p>Slots: 100 / {{ scholarship.slot }}</p>
+                <p>Available For: {{ scholarship.availableFor }}</p>
+                <p>
+                    Deadline: {{ dayjs(scholarship.deadlineAt).format("LL") }}
+                </p>
+                <p v-if="currentDate <= scholarship.deadlineAt">Available</p>
+            </div>
         </div>
         <div class="p-6 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
             <button
+                v-if="scholarship.status === 'onHold'"
+                type="button"
+                class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+            >
+                On Hold
+            </button>
+            <button
+                v-else
                 type="button"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
