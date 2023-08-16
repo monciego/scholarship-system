@@ -53,7 +53,9 @@ class ScholarshipController extends Controller
      */
     public function show(Scholarship $scholarship)
     {
-        //
+        return Inertia::render('Representative/Scholarships/Show', [
+            'scholarship' => $scholarship
+        ]);
     }
 
     /**

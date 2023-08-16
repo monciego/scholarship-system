@@ -10,6 +10,8 @@ class Scholarship extends Model
 {
     use HasFactory;
 
+    protected $with = ['representative'];
+
     protected $fillable = [
         'scholarshipName',
         'deadlineAt',

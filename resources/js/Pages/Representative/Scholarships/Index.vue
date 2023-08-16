@@ -52,12 +52,23 @@ defineProps(["scholarships"]);
                         >
                             {{ scholarship.details }}
                         </p>
-                        <a
-                            href="#"
+
+                        <Link
+                            :href="
+                                route('scholarship.show', {
+                                    id: scholarship.id,
+                                })
+                            "
                             class="text-base font-medium text-indigo-700 hover:text-indigo-600"
                         >
                             More Details <span aria-hidden="true"> &rarr;</span>
-                        </a>
+                        </Link>
+                        <!--      <a
+                            href=""
+                            class="text-base font-medium text-indigo-700 hover:text-indigo-600"
+                        >
+                            More Details <span aria-hidden="true"> &rarr;</span>
+                        </a> -->
                     </div>
                     <div
                         class="p-6 flex items-center gap-2 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8"

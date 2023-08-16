@@ -8,6 +8,7 @@ import ScholarshipCard from "../../Shared/ScholarshipCard.vue";
 </script>
 
 <template>
+    <Head title="Scholarships" />
     <div class="bg-gray-50">
         <div class="relative overflow-hidden">
             <BackgroundPattern />
