@@ -41,8 +41,26 @@ defineProps(["scholarships"]);
                 <div
                     v-for="scholarship in scholarships"
                     :key="scholarship.id"
-                    class="flex flex-col bg-white rounded-2xl shadow-xl"
+                    class="flex flex-col relative bg-white rounded-2xl shadow-xl"
+                    :class="
+                        (scholarship.status === 'notAvailable' &&
+                            'border-red-700 border-2') ||
+                        (scholarship.status === 'onHold' &&
+                            'border-yellow-500 border-2')
+                    "
                 >
+                    <div
+                        class="absolute top-1 right-4 px-4 py-1 text-white rounded-md bg-red-600"
+                        v-if="scholarship.status === 'notAvailable'"
+                    >
+                        Not Available
+                    </div>
+                    <div
+                        class="absolute top-1 right-4 px-4 py-1 text-white rounded-md bg-yellow-600"
+                        v-if="scholarship.status === 'onHold'"
+                    >
+                        On Hold
+                    </div>
                     <div class="flex-1 relative pt-8 px-6 pb-8 md:px-8">
                         <h3 class="text-xl font-medium text-gray-900">
                             {{ scholarship.scholarshipName }}
@@ -63,12 +81,6 @@ defineProps(["scholarships"]);
                         >
                             More Details <span aria-hidden="true"> &rarr;</span>
                         </Link>
-                        <!--      <a
-                            href=""
-                            class="text-base font-medium text-indigo-700 hover:text-indigo-600"
-                        >
-                            More Details <span aria-hidden="true"> &rarr;</span>
-                        </a> -->
                     </div>
                     <div
                         class="p-6 flex items-center gap-2 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8"
