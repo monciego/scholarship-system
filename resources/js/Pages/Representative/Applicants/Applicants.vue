@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 defineProps(["applicants"]);
 </script>
 
@@ -54,11 +54,16 @@ defineProps(["applicants"]);
                             >
                                 <span class="xs:block text-xs">Reject</span>
                             </button>
-                            <a
-                                href="#"
+
+                            <Link
+                                :href="
+                                    route('applicants.show', {
+                                        id: applicant.id,
+                                    })
+                                "
                                 class="font-medium ml-4 text-indigo-600 hover:underline"
                             >
-                                More</a
+                                More</Link
                             >
                         </td>
                     </tr>

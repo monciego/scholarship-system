@@ -13,7 +13,6 @@ class ApplicantController extends Controller
      */
     public function index()
     {
-        // dd(ApplicationForm::with('scholarship')->get());
         return Inertia::render('Representative/Applicants/Applicants', [
             'applicants' => ApplicationForm::withWhereHas('scholarship', function ($query) {
                 return $query->where('user_id', auth()->user()->id);
@@ -40,9 +39,10 @@ class ApplicantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ApplicationForm $applicant)
     {
-        //
+        $applicant = ApplicationForm::with('scholarship')->findOrFail($applicant->id);
+        return Inertia::render('Representative/Applicants/ApplicantInformation', compact('applicant'));
     }
 
     /**

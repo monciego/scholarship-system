@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
 
 Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {
     Route::resource('scholarship', ScholarshipController::class);
-    Route::resource('applicants', ApplicantController::class)->only('index');
+    Route::resource('applicants', ApplicantController::class)->only('index', 'show');
 });
 
 Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
