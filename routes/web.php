@@ -5,6 +5,7 @@ use App\Http\Controllers\ApplicationFormController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScholarController;
 use App\Http\Controllers\ScholarshipController;
 use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
 Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {
     Route::resource('scholarship', ScholarshipController::class);
     Route::resource('applicants', ApplicantController::class)->only('index', 'show');
+    Route::resource('scholars', ScholarController::class)->only('index', 'show');
     Route::post('/approve-applicant', [ApplicantController::class, 'approve'])->name('approve-applicant');
 });
 
