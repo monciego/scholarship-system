@@ -1,7 +1,12 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 defineProps(["applicants"]);
+
+const approveForm = useForm({
+    id: "",
+    approve: true,
+});
 </script>
 
 <template>
@@ -44,21 +49,52 @@ defineProps(["applicants"]);
                             {{ applicant.scholarship.scholarshipName }}
                         </td>
                         <td class="px-6 flex gap-1 items-center py-4">
-                            <button
-                                class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
+                            <form
+                                @submit.prevent="
+                                    approveForm
+                                        .transform((data) => ({
+                                            ...data,
+                                            id: applicant.id,
+                                        }))
+                                        .post(route('approve-applicant'))
+                                "
                             >
-                                <span class="xs:block text-xs">Approve</span>
-                            </button>
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    v-model="approveForm.id"
+                                />
+                                <input
+                                    class="hidden"
+                                    v-model="approveForm.approve"
+                                    type="checkbox"
+                                    disabled="disabled"
+                                    name="approve"
+                                />
+                                <button
+                                    type="submit"
+                                    class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
+                                >
+                                    <span class="xs:block text-xs"
+                                        >Approve</span
+                                    >
+                                </button>
+                            </form>
                             <button
                                 class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
                             >
                                 <span class="xs:block text-xs">Reject</span>
                             </button>
-                            <a
-                                href="#"
+
+                            <Link
+                                :href="
+                                    route('applicants.show', {
+                                        id: applicant.id,
+                                    })
+                                "
                                 class="font-medium ml-4 text-indigo-600 hover:underline"
                             >
-                                More</a
+                                More</Link
                             >
                         </td>
                     </tr>

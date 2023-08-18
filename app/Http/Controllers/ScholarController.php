@@ -6,34 +6,19 @@ use App\Models\ApplicationForm;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ApplicantController extends Controller
+class ScholarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Representative/Applicants/Applicants', [
-            'applicants' => ApplicationForm::where('approve', 0)->withWhereHas('scholarship', function ($query) {
+        return Inertia::render('Representative/Scholars/Scholars', [
+            'applicants' => ApplicationForm::where('approve', 1)->withWhereHas('scholarship', function ($query) {
                 return $query->where('user_id', auth()->user()->id);
             })->latest()->get()
         ]);
     }
-
-
-    /**
-     * Approve application
-     */
-
-    public function approve(Request $request)
-    {
-        ApplicationForm::where('id', $request->id)->update([
-            'approve' => 1,
-        ]);
-
-        return redirect(route('applicants.index'))->with('success', 'Application approved!');
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -54,10 +39,10 @@ class ApplicantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ApplicationForm $applicant)
+    public function show(ApplicationForm $scholar)
     {
-        $applicant = ApplicationForm::with('scholarship')->findOrFail($applicant->id);
-        return Inertia::render('Representative/Applicants/ApplicantInformation', compact('applicant'));
+        $scholar = ApplicationForm::with('scholarship')->where('approve', 1)->findOrFail($scholar->id);
+        return Inertia::render('Representative/Scholars/ScholarInformation', compact('scholar'));
     }
 
     /**
