@@ -1,5 +1,6 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
+import ModalMessage from "@/Components/ModalMessage.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 defineProps(["scholarship"]);
@@ -24,6 +25,8 @@ const form = useForm({
 
 <template>
     <Head title="Application Form" />
+    <ModalMessage />
+
     <section class="max-w-7xl mx-auto pt-5 pb-8 px-4 sm:px-6 x">
         <header class="relative pb-5 border-b border-gray-200 sm:pb-0">
             <div class="md:flex md:items-center md:justify-between">

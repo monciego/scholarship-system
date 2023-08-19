@@ -48,7 +48,7 @@ class ApplicationFormController extends Controller
 
         ApplicationForm::create($validated);
 
-        return redirect()->back()->with('success', 'Application Submitted!');
+        return redirect()->back()->with('successModal', 'Application Submitted!');
     }
 
     /**
