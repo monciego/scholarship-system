@@ -8,7 +8,7 @@ import { Link } from "@inertiajs/vue3";
         class="fixed flex items-center justify-center sm:justify-between px-4 sm:px-6 inset-x-0 top-0 h-20 bg-blue-700 text-white w-full"
     >
         <Link
-            :href="route('login')"
+            :href="route('homepage.index')"
             class="flex items-center flex-shrink-0 px-4"
         >
             <img

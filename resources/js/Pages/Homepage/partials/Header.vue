@@ -23,9 +23,30 @@ import { Link } from "@inertiajs/vue3";
         </div>
 
         <div
-            class="md:absolute flex md:items-center md:justify-end md:inset-y-0 md:right-0"
+            class="md:absolute flex md:items-center gap-2 md:justify-end md:inset-y-0 md:right-0"
         >
-            <span class="inline-flex rounded-md shadow">
+            <Link
+                v-if="$page.props.auth.user"
+                :href="route('dashboard')"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-xs sm:text-sm md:text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                Dashboard
+            </Link>
+            <template v-else>
+                <Link
+                    :href="route('login')"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-xs sm:text-sm md:text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Login
+                </Link>
+                <Link
+                    :href="route('register')"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-xs sm:text-sm md:text-base font-medium rounded-md shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                >
+                    Register
+                </Link>
+            </template>
+            <!--      <span class="inline-flex rounded-md shadow">
                 <a
                     href=""
                     class="inline-flex items-center px-4 py-2 border border-transparent text-xs sm:text-sm md:text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -44,7 +65,7 @@ import { Link } from "@inertiajs/vue3";
                     </svg>
                     Contact Us
                 </a>
-            </span>
+            </span> -->
         </div>
     </nav>
 </template>
