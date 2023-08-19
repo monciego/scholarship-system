@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('campus');
             $table->string('average')->nullable();
             $table->string('admission_test_score')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
