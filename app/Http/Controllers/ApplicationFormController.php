@@ -35,7 +35,15 @@ class ApplicationFormController extends Controller
         $validated = $request->validate([
             'user_id' => 'required',
             'scholarship_id' => 'required',
-            'student_id' => 'required|string|max:255|unique:'.ApplicationForm::class,
+            'student_id' => ['required', 'string', 'max:255',
+            function ($value, $fail) {
+                // Checke if student id is already linked to this scholarship
+                $id_exists = ApplicationForm::where('student_id', $value)->where('scholarship_id', request()->input('scholarship_id'))->count() > 0;
+                if ($id_exists) {
+                    $fail('Student ID already linked to this scholarship');
+                }
+            }
+        ],
             'degree' => 'required|string|max:255',
             'campus' => 'required|string|max:255',
             'average' => 'nullable',
