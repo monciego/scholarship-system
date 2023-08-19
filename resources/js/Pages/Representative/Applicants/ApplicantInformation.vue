@@ -6,7 +6,7 @@ defineProps(["applicant"]);
 </script>
 
 <template>
-    <Head title="Application Form" />
+    <Head title="Applicant Information" />
     <AuthenticatedLayout>
         <section
             v-if="applicant.approve === 0 && applicant.reject === 0"
