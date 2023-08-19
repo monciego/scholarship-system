@@ -46,6 +46,19 @@ class ApplicantController extends Controller
         return redirect(route('applicants.index'))->with('success', 'Application Rejected!');
     }
 
+    /**
+     * Restore application
+     */
+
+    public function restore(Request $request)
+    {
+        ApplicationForm::where('id', $request->id)->update([
+            'reject' => 0,
+        ]);
+
+        return redirect(route('rejected-applicants.index'))->with('success', 'Application Restored!');
+    }
+
 
     /**
      * Show the form for creating a new resource.

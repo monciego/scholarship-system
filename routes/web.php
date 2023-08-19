@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
     Route::resource('scholars', ScholarController::class)->only('index', 'show');
     Route::post('/approve-applicant', [ApplicantController::class, 'approve'])->name('approve-applicant');
     Route::post('/reject-applicant', [ApplicantController::class, 'reject'])->name('reject-applicant');
+    Route::post('/restore-applicant', [ApplicantController::class, 'restore'])->name('restore-applicant');
 });
 
 Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {

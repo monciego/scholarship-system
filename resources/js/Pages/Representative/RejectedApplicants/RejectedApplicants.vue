@@ -2,6 +2,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 defineProps(["applicants"]);
+
+const restoreForm = useForm({
+    id: "",
+    reject: false,
+});
 </script>
 
 <template>
@@ -46,11 +51,38 @@ defineProps(["applicants"]);
                             {{ applicant.scholarship.scholarshipName }}
                         </td>
                         <td class="px-6 py-4 truncate flex gap-2 text-ellipsis">
-                            <button
-                                class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
+                            <form
+                                @submit.prevent="
+                                    restoreForm
+                                        .transform((data) => ({
+                                            ...data,
+                                            id: applicant.id,
+                                        }))
+                                        .post(route('restore-applicant'))
+                                "
                             >
-                                <span class="xs:block text-xs">Restore</span>
-                            </button>
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    v-model="restoreForm.id"
+                                />
+                                <input
+                                    class="hidden"
+                                    v-model="restoreForm.reject"
+                                    type="checkbox"
+                                    disabled="disabled"
+                                    name="reject"
+                                />
+                                <button
+                                    type="submit"
+                                    class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
+                                >
+                                    <span class="xs:block text-xs"
+                                        >Restore</span
+                                    >
+                                </button>
+                            </form>
+
                             <Link
                                 :href="
                                     route('rejected-applicants.show', {
