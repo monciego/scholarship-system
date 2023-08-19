@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\ApplicationFormController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RejectApplicantsController;
+use App\Http\Controllers\ScholarController;
 use App\Http\Controllers\ScholarshipController;
 use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
@@ -28,9 +32,10 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'scholarships' => Scholarship::where('deadlineAt', '>=', $now)->where('status', '=', 'available')->orWhere('status','onHold')->with('representative')->latest()->get()
+        'scholarships' => Scholarship::where('deadlineAt', '>=', $now)->where('status', '=', 'available')->orWhere('status','onHold')->with('representative', 'applicationForm')->latest()->get()
     ]);
-});
+})->name('homepage.index');
+
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -42,12 +47,24 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
 Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], function() {
     Route::get('register-representative-account', [RegisteredRepresentativeController::class, 'create'])
-                ->name('register.representative');
+    ->name('register.representative');
     Route::post('register-representative-account', [RegisteredRepresentativeController::class, 'store']);
 });
 
 Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {
     Route::resource('scholarship', ScholarshipController::class);
+    Route::resource('applicants', ApplicantController::class)->only('index', 'show');
+    Route::resource('rejected-applicants', RejectApplicantsController::class)->only('index', 'show');
+    Route::resource('scholars', ScholarController::class)->only('index', 'show');
+    Route::post('/approve-applicant', [ApplicantController::class, 'approve'])->name('approve-applicant');
+    Route::post('/reject-applicant', [ApplicantController::class, 'reject'])->name('reject-applicant');
+    Route::post('/restore-applicant', [ApplicantController::class, 'restore'])->name('restore-applicant');
+});
+
+Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
+    Route::get('application-form/{scholarship}', [ApplicationFormController::class, 'index'])
+    ->name('application-form');
+    Route::resource('/application', ApplicationFormController::class);
 });
 
 

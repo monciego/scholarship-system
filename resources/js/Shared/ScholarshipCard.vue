@@ -1,6 +1,7 @@
 <script setup>
 defineProps(["scholarships"]);
 
+import { Link, usePage } from "@inertiajs/vue3";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 dayjs.extend(LocalizedFormat);
@@ -51,12 +52,14 @@ dayjs.extend(LocalizedFormat);
             </a>
 
             <div class="mt-2">
-                <p>Slots: 100 / {{ scholarship.slot }}</p>
+                <p>
+                    Slots: {{ scholarship.application_form.length }} /
+                    {{ scholarship.slot }}
+                </p>
                 <p>Available For: {{ scholarship.availableFor }}</p>
                 <p>
                     Deadline: {{ dayjs(scholarship.deadlineAt).format("LL") }}
                 </p>
-                <p v-if="currentDate <= scholarship.deadlineAt">Available</p>
             </div>
         </div>
         <div class="p-6 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
@@ -67,13 +70,17 @@ dayjs.extend(LocalizedFormat);
             >
                 On Hold
             </button>
-            <button
+            <Link
+                :href="
+                    route('application-form', {
+                        id: scholarship.id,
+                    })
+                "
                 v-else
-                type="button"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 Apply Scholarship
-            </button>
+            </Link>
         </div>
     </div>
 </template>

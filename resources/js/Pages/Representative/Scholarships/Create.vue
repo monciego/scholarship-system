@@ -176,6 +176,10 @@ const form = useForm({
                             <p class="mt-2 text-sm text-gray-500">
                                 Write a few sentences about the scholarship.
                             </p>
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.details"
+                            />
                         </div>
                     </div>
                 </div>
