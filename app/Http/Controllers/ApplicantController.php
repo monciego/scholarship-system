@@ -14,12 +14,11 @@ class ApplicantController extends Controller
     public function index()
     {
         return Inertia::render('Representative/Applicants/Applicants', [
-            'applicants' => ApplicationForm::where('approve', 0)->withWhereHas('scholarship', function ($query) {
+            'applicants' => ApplicationForm::where('approve', 0)->where('reject', 0)->withWhereHas('scholarship', function ($query) {
                 return $query->where('user_id', auth()->user()->id);
             })->latest()->get()
         ]);
     }
-
 
     /**
      * Approve application
@@ -32,6 +31,19 @@ class ApplicantController extends Controller
         ]);
 
         return redirect(route('applicants.index'))->with('success', 'Application approved!');
+    }
+
+    /**
+     * Reject application
+     */
+
+    public function reject(Request $request)
+    {
+        ApplicationForm::where('id', $request->id)->update([
+            'reject' => 1,
+        ]);
+
+        return redirect(route('applicants.index'))->with('success', 'Application Rejected!');
     }
 
 

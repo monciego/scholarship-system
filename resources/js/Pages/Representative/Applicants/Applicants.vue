@@ -7,6 +7,11 @@ const approveForm = useForm({
     id: "",
     approve: true,
 });
+
+const rejectForm = useForm({
+    id: "",
+    reject: true,
+});
 </script>
 
 <template>
@@ -80,11 +85,35 @@ const approveForm = useForm({
                                     >
                                 </button>
                             </form>
-                            <button
-                                class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
+                            <form
+                                @submit.prevent="
+                                    rejectForm
+                                        .transform((data) => ({
+                                            ...data,
+                                            id: applicant.id,
+                                        }))
+                                        .post(route('reject-applicant'))
+                                "
                             >
-                                <span class="xs:block text-xs">Reject</span>
-                            </button>
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    v-model="rejectForm.id"
+                                />
+                                <input
+                                    class="hidden"
+                                    v-model="rejectForm.reject"
+                                    type="checkbox"
+                                    disabled="disabled"
+                                    name="reject"
+                                />
+                                <button
+                                    type="submit"
+                                    class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
+                                >
+                                    <span class="xs:block text-xs">Reject</span>
+                                </button>
+                            </form>
 
                             <Link
                                 :href="

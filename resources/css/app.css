@@ -25,3 +25,11 @@
     transform: rotate(-14deg);
     border-radius: 0;
 }
+
+.is-rejected {
+    color: #d23;
+    border: 0.5rem double #d23;
+    transform: rotate(3deg);
+    -webkit-mask-position: 2rem 3rem;
+    font-size: 2rem;
+}
