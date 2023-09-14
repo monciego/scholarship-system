@@ -6,6 +6,7 @@ use App\Models\ApplicationForm;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Closure;
 
 class ApplicationFormController extends Controller
 {
@@ -36,13 +37,13 @@ class ApplicationFormController extends Controller
             'user_id' => 'required',
             'scholarship_id' => 'required',
             'student_id' => ['required', 'string', 'max:255',
-            function ($value, $fail) {
-                // Checke if student id is already linked to this scholarship
-                $id_exists = ApplicationForm::where('student_id', $value)->where('scholarship_id', request()->input('scholarship_id'))->count() > 0;
+            function (string $attribute, mixed $value, Closure $fail) {
+                $student_id = request()->input('student_id');
+                $id_exists = ApplicationForm::where('student_id', $student_id)->where('scholarship_id', request()->input('scholarship_id'))->count() > 0;
                 if ($id_exists) {
-                    $fail('Student ID already linked to this scholarship');
+                    $fail("Student ID already linked to this scholarship.");
                 }
-            }
+            },
         ],
             'degree' => 'required|string|max:255',
             'campus' => 'required|string|max:255',
