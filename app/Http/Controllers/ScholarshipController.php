@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ScholarshipPublished;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+
+
 
 class ScholarshipController extends Controller
 {
@@ -43,9 +46,11 @@ class ScholarshipController extends Controller
             'details' => 'nullable|string|max:255',
         ]);
 
-        $request->user()->scholarships()->create($validated);
+      $scholarship =  $request->user()->scholarships()->create($validated);
 
-        return redirect(route('scholarship.index'))->with('success', 'Scholarship Created Successfully!');
+        event(new ScholarshipPublished($scholarship));
+
+        return redirect()->back()->with('success', 'Scholarship Created Successfully!');
     }
 
     /**

@@ -19,6 +19,8 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.0.18",
-        "dayjs": "^1.11.9"
+        "dayjs": "^1.11.9",
+        "laravel-echo": "^1.15.2",
+        "pusher-js": "^8.3.0"
     }
 }
