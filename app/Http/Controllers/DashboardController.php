@@ -10,11 +10,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->hasRole('user')) {
+        /** @var \App\Models\User */
+        $user = Auth::user();
+        if ($user->hasRole('user')) {
             return Inertia::render('User/Dashboard/Dashboard');
-        } elseif (Auth::user()->hasRole('administrator')) {
+        } elseif ($user->hasRole('administrator')) {
             return Inertia::render('Administrator/Dashboard/Dashboard');
-        } elseif (Auth::user()->hasRole('representative')) {
+        } elseif ($user->hasRole('representative')) {
             return Inertia::render('Representative/Dashboard/Dashboard');
         };
     }
