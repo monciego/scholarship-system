@@ -12,6 +12,10 @@ dayjs.extend(LocalizedFormat);
         v-for="scholarship in scholarships"
         :key="scholarship.id"
         class="flex flex-col bg-white rounded-2xl shadow-xl"
+        :class="
+            scholarship.slot <= scholarship.application_form.length &&
+            'border-red-700 border-4'
+        "
     >
         <div class="flex-1 relative pt-16 px-6 pb-4 md:px-8">
             <div
@@ -22,6 +26,10 @@ dayjs.extend(LocalizedFormat);
             </div>
             <div
                 class="absolute top-0 p-4 inline-block bg-indigo-600 rounded-xl shadow-lg transform -translate-y-1/2"
+                :class="
+                    scholarship.slot <= scholarship.application_form.length &&
+                    'bg-red-600 '
+                "
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -69,6 +77,13 @@ dayjs.extend(LocalizedFormat);
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
             >
                 On Hold
+            </button>
+            <button
+                v-if="scholarship.slot <= scholarship.application_form.length"
+                type="button"
+                class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+                Full
             </button>
             <Link
                 :href="
