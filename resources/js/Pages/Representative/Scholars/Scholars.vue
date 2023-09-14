@@ -13,7 +13,23 @@ defineProps(["applicants"]);
             <h2 class="font-semibold text-lg text-slate-800">Scholars</h2>
         </header>
 
-        <div class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div
+            v-if="applicants.length === 0"
+            class="flex flex-col gap-8 items-center justify-center mt-16"
+        >
+            <img
+                class="h-60"
+                src="/images/empty-state/empty-illustration.svg"
+            />
+            <h2 class="text-center sm:text-xl uppercase">
+                No Scholars at the Moment
+            </h2>
+        </div>
+
+        <div
+            v-else
+            class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg"
+        >
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-indigo-50">
                     <tr>

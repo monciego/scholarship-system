@@ -36,7 +36,20 @@ defineProps(["scholarships"]);
             </div>
         </header>
 
-        <section class="mt-8">
+        <div
+            v-if="scholarships.length === 0"
+            class="flex flex-col gap-8 items-center justify-center mt-16"
+        >
+            <img
+                class="h-60"
+                src="/images/empty-state/empty-illustration.svg"
+            />
+            <h2 class="text-center sm:text-xl uppercase">
+                No Scholarships at the Moment
+            </h2>
+        </div>
+
+        <section class="mt-8" v-else>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div
                     v-for="scholarship in scholarships"
