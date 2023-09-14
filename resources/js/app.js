@@ -27,3 +27,9 @@ createInertiaApp({
         showSpinner: true,
     },
 });
+
+if (window.Notification) {
+    console.log("Notifications are supported!");
+} else {
+    alert("Notifications aren't supported on your browser! :(");
+}

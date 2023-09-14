@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, Link, router, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
     scholarshipName: "",
@@ -14,17 +14,55 @@ const form = useForm({
     applicationLink: "",
     details: "",
 });
+
+function submit() {
+    router.post(route("scholarship.store"), form, {
+        onSuccess: () => form.reset(),
+    });
+
+    const listenForChanges = () => {
+        {
+            console.log(Echo.channel("scholarships"));
+            Echo.channel("scholarships").listen(
+                "ScholarshipPublished",
+                (post) => {
+                    if (!("Notification" in window)) {
+                        alert("Web Notification is not supported");
+                        return;
+                    } else if (Notification.permission === "granted") {
+                        // Check whether notification permissions have already been granted;
+                        // if so, create a notification
+                        const notification = new Notification(
+                            "New Scholarship Available!",
+                            {
+                                body: post.scholarshipName,
+                                icon: "https://upload.wikimedia.org/wikipedia/en/7/75/Pangasinan_State_University_logo.png",
+                            }
+                        );
+                        notification.onclick = () => {
+                            window.open("/");
+                        };
+                        // …
+                    }
+                }
+            );
+        }
+    };
+    listenForChanges();
+}
+
+const addPost = (scholarshipName, details) => {
+    // check if entries are not empty
+    if (!scholarshipName || !details) {
+        console.log("nope");
+    }
+};
 </script>
 <template>
     <Head title="Scholarships" />
-
     <AuthenticatedLayout>
         <form
-            @submit.prevent="
-                form.post(route('scholarship.store'), {
-                    onSuccess: () => form.reset(),
-                })
-            "
+            @submit.prevent="submit"
             class="space-y-8 divide-y divide-gray-200"
         >
             <div class="space-y-8 divide-y divide-gray-200">
@@ -194,6 +232,7 @@ const form = useForm({
                         Cancel
                     </Link>
                     <button
+                        @click="addPost(form.scholarshipName, form.details)"
                         type="submit"
                         class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
