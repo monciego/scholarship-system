@@ -78,18 +78,18 @@ dayjs.extend(LocalizedFormat);
         </div>
         <div class="p-6 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
             <button
-                v-if="scholarship.status === 'onHold'"
-                type="button"
-                class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
-            >
-                On Hold
-            </button>
-            <button
                 v-if="scholarship.slot <= scholarship.application_form.length"
                 type="button"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
                 Full
+            </button>
+            <button
+                v-else-if="scholarship.status === 'onHold'"
+                type="button"
+                class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+            >
+                On Hold
             </button>
             <Link
                 :href="
