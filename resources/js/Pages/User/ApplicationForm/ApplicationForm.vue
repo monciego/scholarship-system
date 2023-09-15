@@ -2,6 +2,7 @@
 import InputError from "@/Components/InputError.vue";
 import ModalMessage from "@/Components/ModalMessage.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import dayjs from "dayjs";
 
 defineProps(["scholarship"]);
 
@@ -68,6 +69,20 @@ const form = useForm({
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     {{ scholarship.scholarshipName }}
+                    <span class="text-sm">
+                        (SY)
+                        {{
+                            dayjs(
+                                scholarship.school_year.start_school_year
+                            ).year()
+                        }}
+                        to
+                        {{
+                            dayjs(
+                                scholarship.school_year.end_school_year
+                            ).year()
+                        }}
+                    </span>
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
                     Use a permanent address where you can receive mail.

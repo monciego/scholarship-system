@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('scholarships', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('school_year_id')->constrained()->cascadeOnDelete();
             $table->string('scholarshipName');
             $table->date('deadlineAt');
             $table->string('availableFor');

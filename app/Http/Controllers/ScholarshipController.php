@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ScholarshipPublished;
 use App\Models\Scholarship;
+use App\Models\SchoolYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -28,7 +29,8 @@ class ScholarshipController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Representative/Scholarships/Create');
+        $school_years = SchoolYear::get();
+        return Inertia::render('Representative/Scholarships/Create', compact('school_years'));
     }
 
     /**
@@ -37,6 +39,7 @@ class ScholarshipController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'school_year_id' => 'required',
             'scholarshipName' => 'required|string|max:255',
             'deadlineAt' => 'required|date|max:255',
             'availableFor' => 'required|string|max:255',
@@ -47,6 +50,7 @@ class ScholarshipController extends Controller
         ]);
 
       $scholarship =  $request->user()->scholarships()->create($validated);
+
 
         event(new ScholarshipPublished($scholarship));
 
@@ -69,7 +73,8 @@ class ScholarshipController extends Controller
     public function edit(Scholarship $scholarship)
     {
         return Inertia::render('Representative/Scholarships/Edit', [
-            'scholarship' => $scholarship
+            'scholarship' => $scholarship,
+            'school_years' =>  SchoolYear::get(),
         ]);
     }
 
@@ -80,6 +85,7 @@ class ScholarshipController extends Controller
     {
         $validated = $request->validate([
             'scholarshipName' => 'required|string|max:255',
+            'school_year_id' => 'required',
             'deadlineAt' => 'required|date|max:255',
             'availableFor' => 'required|string|max:255',
             'status' => 'required',

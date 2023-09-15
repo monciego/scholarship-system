@@ -49,7 +49,13 @@ dayjs.extend(LocalizedFormat);
             <h3 class="text-xl font-medium text-gray-900">
                 {{ scholarship.scholarshipName }}
             </h3>
-            <p class="mt-4 mb-2 line-clamp-3 text-base text-gray-500">
+            <p class="text-sm">
+                (SY)
+                {{ dayjs(scholarship.school_year.start_school_year).year() }}
+                to
+                {{ dayjs(scholarship.school_year.end_school_year).year() }}
+            </p>
+            <p class="mt-3 mb-2 line-clamp-3 text-base text-gray-500">
                 {{ scholarship.details }}
             </p>
             <a

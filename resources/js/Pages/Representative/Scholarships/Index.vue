@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import DeleteScholarship from "./DeleteScholarship.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import dayjs from "dayjs";
 defineProps(["scholarships"]);
 </script>
 <template>
@@ -78,6 +79,20 @@ defineProps(["scholarships"]);
                         <h3 class="text-xl font-medium text-gray-900">
                             {{ scholarship.scholarshipName }}
                         </h3>
+                        <p class="text-sm">
+                            (SY)
+                            {{
+                                dayjs(
+                                    scholarship.school_year.start_school_year
+                                ).year()
+                            }}
+                            to
+                            {{
+                                dayjs(
+                                    scholarship.school_year.end_school_year
+                                ).year()
+                            }}
+                        </p>
                         <p
                             class="mt-4 mb-2 text-base text-gray-500 line-clamp-3"
                         >

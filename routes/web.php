@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RejectApplicantsController;
 use App\Http\Controllers\ScholarController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\SchoolYearController;
 use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,7 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
     Route::get('register-representative-account', [RegisteredRepresentativeController::class, 'create'])
     ->name('register.representative');
     Route::post('register-representative-account', [RegisteredRepresentativeController::class, 'store']);
+    Route::resource('school-year', SchoolYearController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {
