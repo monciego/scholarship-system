@@ -75,6 +75,11 @@ const rejectForm = useForm({
                                     approveForm
                                         .transform((data) => ({
                                             ...data,
+                                            name: applicant.first_name,
+                                            scholarshipName:
+                                                applicant.scholarship
+                                                    .scholarshipName,
+                                            email: applicant.email,
                                             id: applicant.id,
                                         }))
                                         .post(route('approve-applicant'))
@@ -106,6 +111,11 @@ const rejectForm = useForm({
                                     rejectForm
                                         .transform((data) => ({
                                             ...data,
+                                            name: applicant.first_name,
+                                            scholarshipName:
+                                                applicant.scholarship
+                                                    .scholarshipName,
+                                            email: applicant.email,
                                             id: applicant.id,
                                         }))
                                         .post(route('reject-applicant'))
