@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('representative@psu.edu.ph'),
         ]);
         $representative->addRole('representative');
+
+        DB::table('school_years')->insert([
+            'start_school_year' => '2023-06-05',
+            'end_school_year' => '2024-05-10'
+        ]);
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

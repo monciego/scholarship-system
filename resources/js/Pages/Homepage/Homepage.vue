@@ -34,6 +34,20 @@ defineProps(["scholarships"]);
                 </h2>
                 <!-- Scholarship card goes here -->
                 <div
+                    v-if="scholarships.length === 0"
+                    class="flex flex-col gap-8 items-center justify-center mt-16"
+                >
+                    <img
+                        class="h-60"
+                        src="/images/empty-state/empty-scholarship.svg"
+                    />
+                    <h2 class="text-center text-white sm:text-xl uppercase">
+                        No Available Scholarships at the Moment
+                    </h2>
+                </div>
+
+                <div
+                    v-else
                     class="grid grid-cols-1 lg:grid-cols-3 gap-y-16 lg:gap-x-8"
                 >
                     <ScholarshipCard :scholarships="scholarships" />

@@ -12,9 +12,10 @@ class Scholarship extends Model
 {
     use HasFactory;
 
-    protected $with = ['representative', 'applicationForm'];
+    protected $with = ['representative', 'applicationForm', 'schoolYear'];
 
     protected $fillable = [
+        'school_year_id',
         'scholarshipName',
         'deadlineAt',
         'availableFor',
@@ -32,5 +33,10 @@ class Scholarship extends Model
     public function applicationForm(): HasMany
     {
         return $this->hasMany(ApplicationForm::class);
+    }
+
+    public function schoolYear(): BelongsTo
+    {
+        return $this->belongsTo(SchoolYear::class, 'school_year_id');
     }
 }

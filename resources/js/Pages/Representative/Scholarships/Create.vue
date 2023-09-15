@@ -4,9 +4,13 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, router, useForm } from "@inertiajs/vue3";
+import dayjs from "dayjs";
+
+defineProps(["school_years"]);
 
 const form = useForm({
     scholarshipName: "",
+    school_year_id: "",
     deadlineAt: "",
     availableFor: "",
     status: "",
@@ -156,6 +160,44 @@ const addPost = (scholarshipName, details) => {
                                 <InputError
                                     class="mt-2"
                                     :message="form.errors.status"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <InputLabel
+                                for="school_year_id"
+                                value="School Year"
+                            />
+                            <div class="mt-1">
+                                <select
+                                    v-model="form.school_year_id"
+                                    id="school_year_id"
+                                    name="school_year_id"
+                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                >
+                                    <option
+                                        v-for="school_year in school_years"
+                                        :key="school_year.id"
+                                        :value="school_year.id"
+                                    >
+                                        {{
+                                            dayjs(
+                                                school_year.start_school_year
+                                            ).year()
+                                        }}
+                                        -
+
+                                        {{
+                                            dayjs(
+                                                school_year.end_school_year
+                                            ).year()
+                                        }}
+                                    </option>
+                                </select>
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.school_year_id"
                                 />
                             </div>
                         </div>

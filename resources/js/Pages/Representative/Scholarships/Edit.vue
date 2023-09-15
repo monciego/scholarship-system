@@ -4,17 +4,29 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import dayjs from "dayjs";
+
 import { ref } from "vue";
 
-const props = defineProps(["scholarship"]);
+// const props = defineProps(["scholarship"]);
+
+const props = defineProps({
+    scholarship: Object,
+    school_years: Array,
+});
+
+const scholarship = props.scholarship;
+const school_years = props.school_years;
+
 const form = useForm({
-    scholarshipName: props.scholarship.scholarshipName,
-    deadlineAt: props.scholarship.deadlineAt,
-    availableFor: props.scholarship.availableFor,
-    status: props.scholarship.status,
-    slot: props.scholarship.slot,
-    applicationLink: props.scholarship.applicationLink,
-    details: props.scholarship.details,
+    scholarshipName: scholarship.scholarshipName,
+    school_year_id: scholarship.school_year_id,
+    deadlineAt: scholarship.deadlineAt,
+    availableFor: scholarship.availableFor,
+    status: scholarship.status,
+    slot: scholarship.slot,
+    applicationLink: scholarship.applicationLink,
+    details: scholarship.details,
 });
 </script>
 <template>
@@ -22,8 +34,9 @@ const form = useForm({
 
     <AuthenticatedLayout>
         <form
-        @submit.prevent="form.put(route('scholarship.update', scholarship.id))"
-
+            @submit.prevent="
+                form.put(route('scholarship.update', scholarship.id))
+            "
             class="space-y-8 divide-y divide-gray-200"
         >
             <div class="space-y-8 divide-y divide-gray-200">
@@ -117,6 +130,44 @@ const form = useForm({
                                 <InputError
                                     class="mt-2"
                                     :message="form.errors.status"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <InputLabel
+                                for="school_year_id"
+                                value="School Year"
+                            />
+                            <div class="mt-1">
+                                <select
+                                    v-model="form.school_year_id"
+                                    id="school_year_id"
+                                    name="school_year_id"
+                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                >
+                                    <option
+                                        v-for="school_year in school_years"
+                                        :key="school_year.id"
+                                        :value="school_year.id"
+                                    >
+                                        {{
+                                            dayjs(
+                                                school_year.start_school_year
+                                            ).year()
+                                        }}
+                                        -
+
+                                        {{
+                                            dayjs(
+                                                school_year.end_school_year
+                                            ).year()
+                                        }}
+                                    </option>
+                                </select>
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.school_year_id"
                                 />
                             </div>
                         </div>

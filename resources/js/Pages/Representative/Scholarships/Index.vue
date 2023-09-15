@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import DeleteScholarship from "./DeleteScholarship.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import dayjs from "dayjs";
 defineProps(["scholarships"]);
 </script>
 <template>
@@ -36,7 +37,20 @@ defineProps(["scholarships"]);
             </div>
         </header>
 
-        <section class="mt-8">
+        <div
+            v-if="scholarships.length === 0"
+            class="flex flex-col gap-8 items-center justify-center mt-16"
+        >
+            <img
+                class="h-60"
+                src="/images/empty-state/empty-illustration.svg"
+            />
+            <h2 class="text-center sm:text-xl uppercase">
+                No Scholarships at the Moment
+            </h2>
+        </div>
+
+        <section class="mt-8" v-else>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div
                     v-for="scholarship in scholarships"
@@ -65,6 +79,20 @@ defineProps(["scholarships"]);
                         <h3 class="text-xl font-medium text-gray-900">
                             {{ scholarship.scholarshipName }}
                         </h3>
+                        <p class="text-sm">
+                            (SY)
+                            {{
+                                dayjs(
+                                    scholarship.school_year.start_school_year
+                                ).year()
+                            }}
+                            to
+                            {{
+                                dayjs(
+                                    scholarship.school_year.end_school_year
+                                ).year()
+                            }}
+                        </p>
                         <p
                             class="mt-4 mb-2 text-base text-gray-500 line-clamp-3"
                         >
