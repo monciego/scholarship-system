@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ApprovedApplicantEmail;
 use App\Mail\RejectedApplicantEmail;
+use App\Mail\RestoredApplicantEmail;
 use App\Models\ApplicationForm;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
@@ -79,6 +80,15 @@ class ApplicantController extends Controller
         ApplicationForm::where('id', $request->id)->update([
             'reject' => 0,
         ]);
+
+        $data = [
+            'scholarshipName' => $request->scholarshipName,
+            'email' => $request->email,
+            'name' => $request->name,
+            'representativeEmail' => Auth::user()->email,
+        ];
+
+        Mail::to($data['email'])->send(new RestoredApplicantEmail($data));
 
         return redirect(route('rejected-applicants.index'))->with('success', 'Application Restored!');
     }

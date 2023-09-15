@@ -72,6 +72,11 @@ const restoreForm = useForm({
                                     restoreForm
                                         .transform((data) => ({
                                             ...data,
+                                            name: applicant.first_name,
+                                            scholarshipName:
+                                                applicant.scholarship
+                                                    .scholarshipName,
+                                            email: applicant.email,
                                             id: applicant.id,
                                         }))
                                         .post(route('restore-applicant'))
