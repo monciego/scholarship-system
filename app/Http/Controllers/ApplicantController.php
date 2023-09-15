@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApprovedApplicantEmail;
 use App\Models\ApplicationForm;
+use App\Models\Scholarship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicantController extends Controller
 {
@@ -29,6 +33,16 @@ class ApplicantController extends Controller
         ApplicationForm::where('id', $request->id)->update([
             'approve' => 1,
         ]);
+
+        $data = [
+            'scholarshipName' => $request->scholarshipName,
+            'email' => $request->email,
+            'name' => $request->name,
+            'representativeName' => Auth::user()->name,
+            'representativeEmail' => Auth::user()->email,
+        ];
+
+        Mail::to($data['email'])->send(new ApprovedApplicantEmail($data));
 
         return redirect(route('applicants.index'))->with('success', 'Application approved!');
     }
