@@ -82,28 +82,32 @@
                     <p class="greetings">Hello {{ $data["name"] }},</p>
                     <div class="body">
                         <p>
-                            Congratulations! We are pleased to inform you that your
-                            application for the {{ $data["scholarshipName"] }} has been
-                            approved.
+                            I hope this message finds you well. We would like to express our sincere appreciation for
+                            your interest in the {{ $data["scholarshipName"] }} and for taking the time to submit your
+                            application. Your commitment to your academic pursuits and goals is commendable, and we
+                            truly value your
+                            dedication.
                         </p>
                         <p>
-                            Your dedication, achievements, and commitment to your
-                            academic and personal goals truly stood out among the
-                            many impressive applicants we received. We are confident
-                            that this scholarship will further support your journey
-                            towards academic excellence and personal growth.
+                            While your application was not successful this time, we encourage you to continue pursuing
+                            your academic and personal aspirations. Receiving a scholarship is just one of the many ways
+                            to achieve your goals, and we believe in your potential to succeed.
                         </p>
                         <p>
-                            If you have any questions or require further assistance,
-                            please do not hesitate to contact our scholarship
-                            coordinator, {{ $data["representativeName"] }}, at {{ $data["representativeEmail"] }}. We
-                            are
-                            here to support you throughout your scholarship journey.
+                            We understand that this news may be disappointing, but we want to assure you that your
+                            application was reviewed with the utmost care and fairness. We encourage you to seek other
+                            scholarship opportunities, as well as explore different avenues of financial aid to support
+                            your educational journey.
                         </p>
                         <p>
-                            Once again, congratulations on your remarkable
-                            achievement! We look forward to seeing you thrive and
-                            excel in your academic pursuits.
+                            If you have any questions or would like feedback on your application, please do not hesitate
+                            to reach out to our scholarship coordinator at {{ $data["representativeEmail"] }}. We are
+                            here to assist you and provide any guidance that may be helpful.
+                        </p>
+                        <p>
+                            Thank you once again for your application, and we wish you the very best in your future
+                            academic endeavors. Your determination and hard work are admirable, and we have no doubt
+                            that you will achieve great things.
                         </p>
                         <p>Best regards,</p>
                         <p class="regards">
@@ -112,7 +116,7 @@
 
                         <div class="cta">
                             <a href="{{ route('homepage.index') }}" class="cta-button">
-                                Explore more scholarships
+                                Explore different scholarships
                             </a>
                         </div>
                     </div>
