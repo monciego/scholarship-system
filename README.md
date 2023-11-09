@@ -1,41 +1,61 @@
-# Scholarship System
+# Scholarship System for Pangasinan State University
 
-Clone and setup
+Welcome to the Scholarship System for Pangasinan State University! This system allows you to manage scholarships and provides students with personalized scholarship suggestions. It also features mobile push notifications to keep users informed about important updates.
 
-1. ```
-   git clone https://github.com/monciego/scholarship-system.git
-   ```
+## Getting Started
 
-2. ```
-   composer install
-   ```
+Follow these steps to clone and set up the project on your local machine:
 
-3. ```
-   npm install
-   ```
+1. **Clone the repository:**
 
-4. ```
-   cp .env.example .env
-   ```
+    ```bash
+    git clone https://github.com/monciego/scholarship-system.git
+    ```
 
-5. ```
-   php artisan key:generate
-   ```
+2. **Install PHP dependencies:**
 
-6. ```
-   php artisan migrate
-   ```
+    ```bash
+    composer install
+    ```
 
-    Run the server
+3. **Install JavaScript dependencies:**
 
-7. ```
-   php artisan serve
-   ```
+    ```bash
+    npm install
+    ```
 
-    Open another terminal and run
+4. **Copy the environment file:**
 
-8. ```
-   npm run dev
-   ```
+    ```bash
+    cp .env.example .env
+    ```
 
-Go to link http://127.0.0.1:8000/
+5. **Generate an application key:**
+
+    ```bash
+    php artisan key:generate
+    ```
+
+6. **Run database migrations:**
+
+    ```bash
+    php artisan migrate
+    ```
+
+7. **Start the development server:**
+
+    ```bash
+    php artisan serve
+    ```
+
+8. **In another terminal, compile assets for development:**
+
+    ```bash
+    npm run dev
+    ```
+
+## Accessing the System
+
+Visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser to access the Scholarship System.
+
+Thank you for exploring the Scholarship System for Pangasinan State University! 🎓🌟
