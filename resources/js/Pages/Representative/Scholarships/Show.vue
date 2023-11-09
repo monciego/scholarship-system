@@ -15,10 +15,29 @@ defineProps(["scholarship"]);
         <div>
             <header class="flex items-center justify-between">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">
-                        {{ scholarship.scholarshipName }} Information
-                    </h3>
-                    <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+                    <div class="sm:flex items-center gap-2">
+                        <h3
+                            class="text-base font-semibold leading-7 text-gray-900"
+                        >
+                            {{ scholarship.scholarshipName }} Information
+                        </h3>
+                        <p
+                            :class="
+                                scholarship.scholarshipType ===
+                                'government scholarship'
+                                    ? 'bg-yellow-600'
+                                    : 'bg-indigo-600 ' &&
+                                      scholarship.scholarshipType ===
+                                          'private scholarship'
+                                    ? 'bg-slate-700'
+                                    : 'bg-indigo-600 '
+                            "
+                            class="text-xs my-2 capitalize inline-block text-white p-2 px-4 rounded"
+                        >
+                            {{ scholarship.scholarshipType }}
+                        </p>
+                    </div>
+                    <p class="max-w-2xl text-sm leading-6 text-gray-500">
                         Information and details about the scholarship.
                     </p>
                 </div>
