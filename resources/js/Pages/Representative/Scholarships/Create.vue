@@ -228,7 +228,12 @@ const addPost = (scholarshipName, details) => {
                             </div>
                         </div>
 
-                        <div class="sm:col-span-3">
+                        <div
+                            class="sm:col-span-3"
+                            v-if="
+                                form.scholarshipType !== 'private scholarship'
+                            "
+                        >
                             <InputLabel for="slot" value="Available Slots" />
                             <div class="mt-1">
                                 <TextInput
@@ -254,7 +259,7 @@ const addPost = (scholarshipName, details) => {
                             <InputLabel for="applicationLink">
                                 Application Form Link
                                 <span class="text-xs"
-                                    >(optional)</span
+                                    >(for private scholarship)</span
                                 ></InputLabel
                             >
 
