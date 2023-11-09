@@ -4,6 +4,7 @@ defineProps(["scholarships"]);
 import { Link, usePage } from "@inertiajs/vue3";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import ButtonLinkPrivate from "./ButtonLinkPrivate.vue";
 dayjs.extend(LocalizedFormat);
 </script>
 
@@ -14,6 +15,8 @@ dayjs.extend(LocalizedFormat);
         class="flex flex-col bg-white rounded-2xl shadow-xl"
         :class="
             scholarship.slot <= scholarship.application_form.length &&
+            (scholarship.scholarshipType === 'academic scholarship' ||
+                scholarship.scholarshipType === 'government scholarship') &&
             'border-red-700 border-4'
         "
     >
@@ -28,7 +31,10 @@ dayjs.extend(LocalizedFormat);
                 class="absolute top-0 p-4 inline-block bg-indigo-600 rounded-xl shadow-lg transform -translate-y-1/2"
                 :class="
                     scholarship.slot <= scholarship.application_form.length &&
-                    'bg-red-600 '
+                    (scholarship.scholarshipType === 'academic scholarship' ||
+                        scholarship.scholarshipType ===
+                            'government scholarship') &&
+                    'bg-red-600'
                 "
             >
                 <svg
@@ -66,7 +72,13 @@ dayjs.extend(LocalizedFormat);
             </a>
 
             <div class="mt-2">
-                <p>
+                <p
+                    v-if="
+                        scholarship.scholarshipType ===
+                            'academic scholarship' ||
+                        scholarship.scholarshipType === 'government scholarship'
+                    "
+                >
                     Slots: {{ scholarship.application_form.length }} /
                     {{ scholarship.slot }}
                 </p>
@@ -78,7 +90,12 @@ dayjs.extend(LocalizedFormat);
         </div>
         <div class="p-6 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
             <button
-                v-if="scholarship.slot <= scholarship.application_form.length"
+                v-if="
+                    scholarship.slot <= scholarship.application_form.length &&
+                    (scholarship.scholarshipType === 'academic scholarship' ||
+                        scholarship.scholarshipType ===
+                            'government scholarship')
+                "
                 type="button"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
@@ -97,11 +114,18 @@ dayjs.extend(LocalizedFormat);
                         id: scholarship.id,
                     })
                 "
-                v-else
+                v-else-if="
+                    scholarship.scholarshipType !== 'private scholarship'
+                "
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 Apply Scholarship
             </Link>
+
+            <ButtonLinkPrivate
+                v-if="scholarship.scholarshipType === 'private scholarship'"
+                :scholarship="scholarship"
+            />
         </div>
     </div>
 </template>
