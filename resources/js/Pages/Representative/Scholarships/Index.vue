@@ -79,6 +79,21 @@ defineProps(["scholarships"]);
                         <h3 class="text-xl font-medium text-gray-900">
                             {{ scholarship.scholarshipName }}
                         </h3>
+                        <p
+                            :class="
+                                scholarship.scholarshipType ===
+                                'government scholarship'
+                                    ? 'bg-yellow-600'
+                                    : 'bg-indigo-600 ' &&
+                                      scholarship.scholarshipType ===
+                                          'private scholarship'
+                                    ? 'bg-slate-700'
+                                    : 'bg-indigo-600 '
+                            "
+                            class="text-sm my-2 capitalize inline-block text-white p-1 px-4 rounded"
+                        >
+                            {{ scholarship.scholarshipType }}
+                        </p>
                         <p class="text-sm">
                             (SY)
                             {{
