@@ -18,6 +18,7 @@ class Scholarship extends Model
         'school_year_id',
         'scholarshipName',
         'deadlineAt',
+        'scholarshipType',
         'availableFor',
         'status',
         'slot',

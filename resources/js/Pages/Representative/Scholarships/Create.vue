@@ -14,6 +14,7 @@ const form = useForm({
     deadlineAt: "",
     availableFor: "",
     status: "",
+    scholarshipType: "",
     slot: "",
     applicationLink: "",
     details: "",
@@ -85,6 +86,31 @@ const addPost = (scholarshipName, details) => {
                     <div
                         class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
                     >
+                        <div class="sm:col-span-3">
+                            <InputLabel for="scholarship-type"
+                                >Scholarship Type</InputLabel
+                            >
+                            <div class="mt-2">
+                                <select
+                                    v-model="form.scholarshipType"
+                                    id="scholarship-type"
+                                    name="scholarshipType"
+                                    autocomplete="scholarship-type"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                >
+                                    <option value="academic scholarship">
+                                        Academic Scholarship
+                                    </option>
+                                    <option value="government scholarship">
+                                        Government Scholarship
+                                    </option>
+                                    <option value="private scholarship">
+                                        Private Scholarship
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="sm:col-span-3">
                             <InputLabel
                                 for="scholarshipName"
@@ -219,7 +245,12 @@ const addPost = (scholarshipName, details) => {
                             </div>
                         </div>
 
-                        <div class="sm:col-span-3">
+                        <div
+                            class="sm:col-span-3"
+                            v-if="
+                                form.scholarshipType === 'private scholarship'
+                            "
+                        >
                             <InputLabel for="applicationLink">
                                 Application Form Link
                                 <span class="text-xs"
