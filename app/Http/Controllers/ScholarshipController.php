@@ -47,6 +47,7 @@ class ScholarshipController extends Controller
             'slot' => 'nullable',
             'applicationLink' => 'nullable|string|max:255',
             'details' => 'nullable|string|max:255',
+            'scholarshipType' => 'nullable|string|max:255',
         ]);
 
       $scholarship =  $request->user()->scholarships()->create($validated);
@@ -91,6 +92,7 @@ class ScholarshipController extends Controller
             'status' => 'required',
             'slot' => 'nullable',
             'applicationLink' => 'nullable|string|max:255',
+            'scholarshipType' => 'nullable|string|max:255',
             'details' => 'nullable|string|max:255',
         ]);
 
