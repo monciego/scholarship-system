@@ -1,11 +1,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
-const isMorning = ref(false);
-const isAfternoon = ref(false);
-
+const currentTime = ref(new Date());
 const greetings = [
     "Have a wonderful day ahead!",
     "Rise and shine!",
@@ -18,24 +16,26 @@ const greetings = [
     "Spend quality time with your loved ones!",
 ];
 
-const greeting = ref("");
-
-let greetingIndex;
-
-onMounted(() => {
-    const today = new Date();
-    const hour = today.getHours();
-
+const timeOfDay = computed(() => {
+    const hour = currentTime.value.getHours();
     if (hour < 12) {
-        greetingIndex = Math.floor(Math.random() * 3);
-        isMorning.value = true;
+        return "morning";
     } else if (hour < 18) {
-        greetingIndex = Math.floor(Math.random() * 3) + 3;
-        isAfternoon.value = true;
+        return "afternoon";
     } else {
-        greetingIndex = Math.floor(Math.random() * 3) + 6;
+        return "evening";
     }
-    greeting.value = greetings[greetingIndex];
+});
+
+const greeting = computed(() => {
+    const greetingIndex =
+        Math.floor(Math.random() * 3) +
+        (timeOfDay.value === "morning"
+            ? 0
+            : timeOfDay.value === "afternoon"
+            ? 3
+            : 6);
+    return greetings[greetingIndex];
 });
 </script>
 
@@ -48,8 +48,12 @@ onMounted(() => {
                     class="bg-gradient-to-r from-indigo-600 to-blue-600 font-[sans-serif] p-6 verflow-hidden shadow-sm sm:rounded-lg"
                 >
                     <h2 class="text-white sm:text-xl text-base font-bold">
-                        <span v-if="isMorning"> Good Morning, </span>
-                        <span v-if="isAfternoon"> Good Afternoon, </span>
+                        <span v-if="timeOfDay === 'morning'">
+                            Good Morning,
+                        </span>
+                        <span v-else-if="timeOfDay === 'afternoon'">
+                            Good Afternoon,
+                        </span>
                         <span v-else> Good Evening, </span>
                         {{ $page.props.auth.user.name }} !
                     </h2>
