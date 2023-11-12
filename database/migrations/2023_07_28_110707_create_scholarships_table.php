@@ -23,6 +23,7 @@ return new class extends Migration
             $table->bigInteger('slot')->nullable();
             $table->string('applicationLink')->nullable();
             $table->longText('details')->nullable();
+            $table->longText('requirements')->nullable();
             $table->timestamps();
         });
     }
