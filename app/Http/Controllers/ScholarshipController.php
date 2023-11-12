@@ -38,7 +38,7 @@ class ScholarshipController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'school_year_id' => 'required',
             'scholarshipName' => 'required|string|max:255',
             'deadlineAt' => 'required|date|max:255',
@@ -48,9 +48,23 @@ class ScholarshipController extends Controller
             'applicationLink' => 'nullable|string|max:255',
             'details' => 'nullable|string|max:255',
             'scholarshipType' => 'nullable|string|max:255',
+            'requirements' => 'nullable',
         ]);
 
-      $scholarship =  $request->user()->scholarships()->create($validated);
+        $requirements = $request->input('requirements');
+
+        $scholarship =  $request->user()->scholarships()->create([
+            'school_year_id' => $request->input('school_year_id'),
+            'scholarshipName' => $request->input('scholarshipName'),
+            'deadlineAt' => $request->input('deadlineAt'),
+            'availableFor' => $request->input('availableFor'),
+            'status' => $request->input('status'),
+            'slot' => $request->input('slot'),
+            'applicationLink' => $request->input('applicationLink'),
+            'details' => $request->input('details'),
+            'scholarshipType' => $request->input('scholarshipType'),
+            'requirements' => implode('|',$requirements),
+        ]);
 
 
         event(new ScholarshipPublished($scholarship));
@@ -94,9 +108,23 @@ class ScholarshipController extends Controller
             'applicationLink' => 'nullable|string|max:255',
             'scholarshipType' => 'nullable|string|max:255',
             'details' => 'nullable|string|max:255',
+            'requirements' => 'nullable',
         ]);
 
-        $scholarship->update($validated);
+        $requirements = $request->input('requirements');
+
+        $scholarship->update([
+            'school_year_id' => $request->input('school_year_id'),
+            'scholarshipName' => $request->input('scholarshipName'),
+            'deadlineAt' => $request->input('deadlineAt'),
+            'availableFor' => $request->input('availableFor'),
+            'status' => $request->input('status'),
+            'slot' => $request->input('slot'),
+            'applicationLink' => $request->input('applicationLink'),
+            'details' => $request->input('details'),
+            'scholarshipType' => $request->input('scholarshipType'),
+            'requirements' => implode('|',$requirements),
+        ]);
 
         return redirect(route('scholarship.index'))->with('success', 'Scholarship Updated Successfully!');
     }

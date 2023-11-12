@@ -24,6 +24,7 @@ class Scholarship extends Model
         'slot',
         'applicationLink',
         'details',
+        'requirements',
     ];
 
     public function representative(): BelongsTo
