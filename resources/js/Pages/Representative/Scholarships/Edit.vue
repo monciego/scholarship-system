@@ -254,88 +254,89 @@ const removeRequirement = (index) => {
                                 />
                             </div>
                         </div>
-
-                        <div class="sm:col-span-6">
-                            <InputLabel for="details" value="Details" />
-                            <div class="mt-1">
-                                <textarea
-                                    v-model="form.details"
-                                    id="details"
-                                    name="details"
-                                    rows="3"
-                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                ></textarea>
-                            </div>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Write a few sentences about the scholarship.
-                            </p>
-                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="sm:col-span-6 mt-4">
-                <div class="flex items-center">
-                    <h2 class="block text-sm font-medium text-gray-700">
-                        Requirements:
-                    </h2>
+                    <div class="sm:col-span-6 mt-4">
+                        <div class="flex items-center">
+                            <h2 class="block text-sm font-medium text-gray-700">
+                                Requirements:
+                            </h2>
 
-                    <div class="relative inline-block group">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-5 h-5"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-                            />
-                        </svg>
+                            <div class="relative inline-block group">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-5 h-5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                                    />
+                                </svg>
+
+                                <div
+                                    class="hidden text-xs w-[17rem] group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-3 rounded"
+                                >
+                                    Enter the requirement name. It will be
+                                    displayed as a file input on the scholars'
+                                    application form.
+                                </div>
+                            </div>
+                        </div>
 
                         <div
-                            class="hidden text-xs w-[17rem] group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-3 rounded"
+                            class="mt-4"
+                            v-for="(requirement, index) in form.requirements"
+                            :key="index"
                         >
-                            Enter the requirement name. It will be displayed as
-                            a file input on the scholars' application form.
+                            <InputLabel :for="'requirement[' + index + ']'">{{
+                                form.requirements[index]
+                            }}</InputLabel>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <TextInput
+                                    v-model="form.requirements[index]"
+                                    :name="'requirement[' + index + ']'"
+                                    :id="'requirement-' + index"
+                                    class="shadow-sm py-2 px-4 block w-full sm:text-sm rounded-md"
+                                />
+                                <button
+                                    @click="removeRequirement(index)"
+                                    type="button"
+                                    class="ml-2 inline-flex justify-center py-2 px-4 border border-red-500 rounded-md text-sm font-medium text-red-500 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                >
+                                    Remove
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div
-                    class="mt-4"
-                    v-for="(requirement, index) in form.requirements"
-                    :key="index"
-                >
-                    <InputLabel :for="'requirement[' + index + ']'">{{
-                        form.requirements[index]
-                    }}</InputLabel>
-                    <div class="flex items-center space-x-2 mt-2">
-                        <TextInput
-                            v-model="form.requirements[index]"
-                            :name="'requirement[' + index + ']'"
-                            :id="'requirement-' + index"
-                            class="shadow-sm py-2 px-4 block w-full sm:text-sm rounded-md"
-                        />
                         <button
-                            @click="removeRequirement(index)"
+                            @click="addRequirement"
                             type="button"
-                            class="ml-2 inline-flex justify-center py-2 px-4 border border-red-500 rounded-md text-sm font-medium text-red-500 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            class="mt-2 inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Remove
+                            Add Requirement
                         </button>
                     </div>
+
+                    <div class="sm:col-span-6 mt-4">
+                        <InputLabel for="details" value="Details" />
+                        <div class="mt-1">
+                            <textarea
+                                v-model="form.details"
+                                id="details"
+                                name="details"
+                                rows="3"
+                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            ></textarea>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">
+                            Write a few sentences about the scholarship.
+                        </p>
+                    </div>
                 </div>
-                <button
-                    @click="addRequirement"
-                    type="button"
-                    class="mt-2 inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Add Requirement
-                </button>
             </div>
 
             <div class="pt-5">
