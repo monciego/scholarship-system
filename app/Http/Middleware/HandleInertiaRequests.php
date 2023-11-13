@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => session('success'),
                 'danger' => session('danger'),
                 'successModal' => session('successModal'),
+                'passedRequirementModal' => session('passedRequirementModal'),
             ]
         ]);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcademicScholarRequirementsController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicationFormController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\RejectApplicantsController;
 use App\Http\Controllers\ScholarController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\SchoolYearController;
+use App\Models\AcademicScholarRequirements;
 use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -66,7 +68,11 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
 Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
     Route::get('application-form/{scholarship}', [ApplicationFormController::class, 'index'])
     ->name('application-form');
-    Route::resource('/application', ApplicationFormController::class);
+ /*    Route::get('application-form-and-pass-requirement/{scholarship}', [ApplicationFormController::class, 'passRequirementForm'])->name('application-form-and-pass-requirement');
+    Route::post('application-form-and-pass-requirement-store', [ApplicationFormController::class, 'passRequirementFormStore'])
+    ->name('application-form-and-pass-requirement.store'); */
+    Route::get('pass-requirements-form/{scholarship}', [AcademicScholarRequirementsController::class, 'index'])->name('pass-requirements.index');
+    Route::resource('pass-requirements', AcademicScholarRequirementsController::class)->only('store');
 });
 
 

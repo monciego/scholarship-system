@@ -74,8 +74,6 @@ dayjs.extend(LocalizedFormat);
             <div class="mt-2">
                 <p
                     v-if="
-                        scholarship.scholarshipType ===
-                            'academic scholarship' ||
                         scholarship.scholarshipType === 'government scholarship'
                     "
                 >
@@ -115,11 +113,24 @@ dayjs.extend(LocalizedFormat);
                     })
                 "
                 v-else-if="
-                    scholarship.scholarshipType !== 'private scholarship'
+                    scholarship.scholarshipType !== 'private scholarship' &&
+                    scholarship.scholarshipType !== 'academic scholarship'
                 "
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 Apply Scholarship
+            </Link>
+
+            <Link
+                :href="
+                    route('pass-requirements.index', {
+                        id: scholarship.id,
+                    })
+                "
+                v-if="scholarship.scholarshipType === 'academic scholarship'"
+                class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                Pass Requirements
             </Link>
 
             <ButtonLinkPrivate

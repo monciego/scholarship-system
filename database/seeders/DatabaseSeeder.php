@@ -24,6 +24,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $representative->addRole('representative');
 
+        $user = \App\Models\User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@psu.edu.ph',
+            'password' => Hash::make('johndoe@psu.edu.ph'),
+        ]);
+        $user->addRole('user');
+
         DB::table('school_years')->insert([
             'start_school_year' => '2023-06-05',
             'end_school_year' => '2024-05-10'
