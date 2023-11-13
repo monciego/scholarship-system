@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AcademicScholarRequirementsController;
+use App\Http\Controllers\AcademicScholarsController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicationFormController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
     Route::resource('applicants', ApplicantController::class)->only('index', 'show');
     Route::resource('rejected-applicants', RejectApplicantsController::class)->only('index', 'show');
     Route::resource('scholars', ScholarController::class)->only('index', 'show');
+    Route::resource('academic-scholars', AcademicScholarsController::class)->only('index', 'show');
     Route::post('/approve-applicant', [ApplicantController::class, 'approve'])->name('approve-applicant');
     Route::post('/reject-applicant', [ApplicantController::class, 'reject'])->name('reject-applicant');
     Route::post('/restore-applicant', [ApplicantController::class, 'restore'])->name('restore-applicant');
