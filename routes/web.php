@@ -41,10 +41,6 @@ Route::get('/', function () {
 })->name('homepage.index');
 
 
-/* Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard'); */
-
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
@@ -70,9 +66,6 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
 Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
     Route::get('application-form/{scholarship}', [ApplicationFormController::class, 'index'])
     ->name('application-form');
- /*    Route::get('application-form-and-pass-requirement/{scholarship}', [ApplicationFormController::class, 'passRequirementForm'])->name('application-form-and-pass-requirement');
-    Route::post('application-form-and-pass-requirement-store', [ApplicationFormController::class, 'passRequirementFormStore'])
-    ->name('application-form-and-pass-requirement.store'); */
     Route::get('pass-requirements-form/{scholarship}', [AcademicScholarRequirementsController::class, 'index'])->name('pass-requirements.index');
     Route::resource('pass-requirements', AcademicScholarRequirementsController::class)->only('store');
 });
