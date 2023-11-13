@@ -37,6 +37,11 @@ class Scholarship extends Model
         return $this->hasMany(ApplicationForm::class);
     }
 
+    public function academicScholarRequirements(): HasMany
+    {
+        return $this->hasMany(AcademicScholarRequirements::class);
+    }
+
     public function schoolYear(): BelongsTo
     {
         return $this->belongsTo(SchoolYear::class, 'school_year_id');
