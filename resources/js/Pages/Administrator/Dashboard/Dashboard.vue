@@ -3,6 +3,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
 
+defineProps(["scholarshipCount"]);
+
 const currentTime = ref(new Date());
 const greetings = [
     "Have a wonderful day ahead!",
@@ -93,7 +95,9 @@ const greeting = computed(() => {
                         </p>
                     </dt>
                     <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
-                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                        <p class="text-2xl font-semibold text-gray-900">
+                            {{ scholarshipCount }}
+                        </p>
                         <div
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
