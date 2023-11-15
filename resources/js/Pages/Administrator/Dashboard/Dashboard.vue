@@ -8,6 +8,8 @@ defineProps([
     "applicantsCount",
     "scholarsCount",
     "rejectScholarsCount",
+    "representativeCount",
+    "registeredUsersCount",
 ]);
 
 const currentTime = ref(new Date());
@@ -288,7 +290,9 @@ const greeting = computed(() => {
                         </p>
                     </dt>
                     <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
-                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                        <p class="text-2xl font-semibold text-gray-900">
+                            {{ representativeCount }}
+                        </p>
                         <div
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
@@ -333,7 +337,9 @@ const greeting = computed(() => {
                         </p>
                     </dt>
                     <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
-                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                        <p class="text-2xl font-semibold text-gray-900">
+                            {{ registeredUsersCount }}
+                        </p>
                         <div
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
