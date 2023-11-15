@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplicationForm;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class DashboardController extends Controller
             return Inertia::render('User/Dashboard/Dashboard');
         } elseif ($user->hasRole('administrator')) {
             $scholarshipCount = Scholarship::count();
-            return Inertia::render('Administrator/Dashboard/Dashboard', compact('scholarshipCount'));
+            $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();
+            return Inertia::render('Administrator/Dashboard/Dashboard', compact('scholarshipCount', 'applicantsCount'));
         } elseif ($user->hasRole('representative')) {
             return Inertia::render('Representative/Dashboard/Dashboard');
         };
