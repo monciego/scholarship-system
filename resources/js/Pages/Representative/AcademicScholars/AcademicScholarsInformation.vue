@@ -1,8 +1,26 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 defineProps(["scholar", "files"]);
+
+// Define refs for modal state and indices
+const isModalOpen = ref(false);
+const modalFileIndex = ref(null);
+const modalImageIndex = ref(null);
+
+const openModal = (fileIndex, imageIndex) => {
+    modalFileIndex.value = fileIndex;
+    modalImageIndex.value = imageIndex;
+    isModalOpen.value = true;
+};
+
+const closeModal = () => {
+    isModalOpen.value = false;
+    modalFileIndex.value = null;
+    modalImageIndex.value = null;
+};
 </script>
 
 <template>
@@ -190,20 +208,74 @@ defineProps(["scholar", "files"]);
             </div>
 
             <h2 class="mt-6">Requirements:</h2>
-            <div v-for="(file, index) in files" :key="index" class="mt-4">
-                <p>{{ scholar.scholarship.requirements.split("|")[index] }}:</p>
+            <div
+                v-for="(file, fileIndex) in files"
+                :key="fileIndex"
+                class="mt-4"
+            >
+                <p>
+                    {{
+                        scholar.scholarship.requirements.split("|")[fileIndex]
+                    }}:
+                </p>
                 <div
                     class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
                 >
-                    <div class="group relative" v-for="x in file" :key="x">
+                    <div
+                        class="group relative cursor-pointer"
+                        v-for="(image, imageIndex) in file"
+                        :key="imageIndex"
+                    >
                         <div
                             class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"
                         >
                             <img
-                                :src="`/storage/${x}`"
-                                alt="Front of men&#039;s Basic Tee in black."
+                                :src="`/storage/${image}`"
+                                alt="Requirements"
                                 class="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                @click="openModal(fileIndex, imageIndex)"
                             />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div
+                v-if="isModalOpen"
+                class="fixed z-[1000] inset-0 my-4 flex items-center justify-center"
+            >
+                <div
+                    class="fixed inset-0 bg-black opacity-75"
+                    @click="closeModal"
+                ></div>
+                <div
+                    class="relative z-10 bg-white rounded p-4 max-w-2xl mx-auto"
+                >
+                    <div class="mt-4">
+                        <div class="flex items- justify-between">
+                            <p>
+                                {{
+                                    scholar.scholarship.requirements.split("|")[
+                                        modalFileIndex
+                                    ]
+                                }}:
+                            </p>
+                            <button
+                                @click="closeModal"
+                                class="text-gray-500 hover:text-gray-700 focus:outline-none"
+                            >
+                                Close
+                            </button>
+                        </div>
+                        <div class="">
+                            <div class="mt-4">
+                                <img
+                                    :src="`/storage/${files[modalFileIndex][modalImageIndex]}`"
+                                    alt="Requirements"
+                                    class="h-[30rem] w-[25rem]"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
