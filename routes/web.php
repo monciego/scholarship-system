@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
 Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
     Route::get('application-form/{scholarship}', [ApplicationFormController::class, 'index'])
     ->name('application-form');
+    Route::resource('/application', ApplicationFormController::class);
     Route::get('pass-requirements-form/{scholarship}', [AcademicScholarRequirementsController::class, 'index'])->name('pass-requirements.index');
     Route::resource('pass-requirements', AcademicScholarRequirementsController::class)->only('store');
 });
