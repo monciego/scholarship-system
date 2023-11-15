@@ -19,7 +19,8 @@ class DashboardController extends Controller
         } elseif ($user->hasRole('administrator')) {
             $scholarshipCount = Scholarship::count();
             $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();
-            return Inertia::render('Administrator/Dashboard/Dashboard', compact('scholarshipCount', 'applicantsCount'));
+            $scholarsCount = ApplicationForm::where('approve', 1)->where('reject', 0)->count();
+            return Inertia::render('Administrator/Dashboard/Dashboard', compact('scholarshipCount', 'scholarsCount', 'applicantsCount'));
         } elseif ($user->hasRole('representative')) {
             return Inertia::render('Representative/Dashboard/Dashboard');
         };
