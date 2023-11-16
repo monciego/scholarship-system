@@ -199,8 +199,8 @@ import { Link } from "@inertiajs/vue3";
                     </NavLink>
                     <NavLink
                         v-if="$page.props.role.user"
-                        :href="route('rejected-applicants.index')"
-                        :active="route().current('rejected-applicants.*')"
+                        :href="route('applied-scholarships.index')"
+                        :active="route().current('applied-scholarships.*')"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

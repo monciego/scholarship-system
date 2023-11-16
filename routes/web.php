@@ -4,6 +4,8 @@ use App\Http\Controllers\AcademicScholarRequirementsController;
 use App\Http\Controllers\AcademicScholarsController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicationFormController;
+use App\Http\Controllers\AppliedScholarships;
+use App\Http\Controllers\AppliedScholarshipsController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -69,6 +71,7 @@ Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
     Route::resource('/application', ApplicationFormController::class);
     Route::get('pass-requirements-form/{scholarship}', [AcademicScholarRequirementsController::class, 'index'])->name('pass-requirements.index');
     Route::resource('pass-requirements', AcademicScholarRequirementsController::class)->only('store');
+    Route::resource('applied-scholarships', AppliedScholarshipsController::class);
 });
 
 
