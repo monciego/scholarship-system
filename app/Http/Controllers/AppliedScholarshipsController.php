@@ -38,9 +38,10 @@ class AppliedScholarshipsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $applicant = ApplicationForm::with('scholarship')->findOrFail($id);
+        return Inertia::render('User/AppliedScholarship/AppliedScholarshipInformation', compact('applicant'));
     }
 
     /**
