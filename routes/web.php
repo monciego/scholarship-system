@@ -8,12 +8,14 @@ use App\Http\Controllers\AppliedScholarships;
 use App\Http\Controllers\AppliedScholarshipsController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrivateScholarshipApplicantsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RejectApplicantsController;
 use App\Http\Controllers\ScholarController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\SchoolYearController;
 use App\Models\AcademicScholarRequirements;
+use App\Models\PrivateScholarshipApplicants;
 use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +74,7 @@ Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
     Route::get('pass-requirements-form/{scholarship}', [AcademicScholarRequirementsController::class, 'index'])->name('pass-requirements.index');
     Route::resource('pass-requirements', AcademicScholarRequirementsController::class)->only('store');
     Route::resource('applied-scholarships', AppliedScholarshipsController::class);
+    Route::resource('private-scholarship-form', PrivateScholarshipApplicantsController::class);
 });
 
 

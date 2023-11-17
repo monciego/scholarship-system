@@ -6,12 +6,14 @@ import HeroImage from "./partials/HeroImage.vue";
 import BackgroundPattern from "./partials/BackgroundPattern.vue";
 import ScholarshipCard from "../../Shared/ScholarshipCard.vue";
 import { Head } from "@inertiajs/vue3";
+import ModalMessagePrivateLink from "@/Components/ModalMessagePrivateLink.vue";
 
 defineProps(["scholarships"]);
 </script>
 
 <template>
     <Head title="Scholarships" />
+    <ModalMessagePrivateLink />
     <div class="bg-gray-50">
         <div class="relative overflow-hidden">
             <BackgroundPattern />
