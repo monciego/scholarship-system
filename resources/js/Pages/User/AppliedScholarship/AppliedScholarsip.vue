@@ -15,21 +15,30 @@ defineProps(["appliedScholarships"]);
             </h2>
         </header>
 
-        <!--     <div
-            v-if="applicants.length === 0"
-            class="flex flex-col gap-8 items-center justify-center mt-16"
+        <div
+            v-if="appliedScholarships.length === 0"
+            class="flex flex-col items-center justify-center mt-16"
         >
             <img
-                class="h-60"
+                class="h-60 mb-8"
                 src="/images/empty-state/empty-illustration.svg"
             />
-            <h2 class="text-center sm:text-xl uppercase">
-                No Applicants at the Moment
+            <h2 class="text-center mb-4 sm:text-xl uppercase">
+                Currently, no applied scholarships.
             </h2>
-        </div> -->
-        <!-- v-else -->
+            <Link
+                :href="route('homepage.index')"
+                class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                Explore & Apply for Scholarships
+            </Link>
+        </div>
+        <!-- -->
 
-        <div class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div
+            v-else
+            class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg"
+        >
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-indigo-50">
                     <tr>
