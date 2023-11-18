@@ -5,7 +5,7 @@ import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { Link, useForm, usePage } from "@inertiajs/vue3";
 import { toRefs } from "vue";
 import { ref } from "vue";
 
@@ -19,11 +19,11 @@ const user = usePage().props.auth.user;
 
 const form = useForm({
     applicationLink: applicationLink.value,
-    user_id: user.id,
+    user_id: user ? user.id : null,
     scholarship_id: scholarshipId.value,
     student_id: "",
     degree: "",
-    email: user.email,
+    email: user ? user.email : "",
     first_name: "",
     middle_name: "",
     last_name: "",
@@ -50,7 +50,16 @@ const closeModal = () => {
 
 <template>
     <section class="space-y-6">
+        <Link
+            :href="route('login')"
+            v-if="!user"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+            Apply Now
+        </Link>
+
         <button
+            v-else
             @click="confirmScholarship"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
@@ -65,7 +74,7 @@ const closeModal = () => {
 
                 <p class="mt-1 text-sm text-gray-600">
                     Please complete the pre-application form first before
-                    following the lin below to access the system and proceed
+                    following the link below to access the system and proceed
                     with your application. We look forward to receiving your
                     submission!
                 </p>
