@@ -8,6 +8,7 @@ use App\Http\Controllers\AppliedScholarships;
 use App\Http\Controllers\AppliedScholarshipsController;
 use App\Http\Controllers\Auth\RegisteredRepresentativeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrivateScholarsController;
 use App\Http\Controllers\PrivateScholarshipApplicantsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RejectApplicantsController;
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
     Route::resource('rejected-applicants', RejectApplicantsController::class)->only('index', 'show');
     Route::resource('scholars', ScholarController::class)->only('index', 'show');
     Route::resource('academic-scholars', AcademicScholarsController::class)->only('index', 'show');
+    Route::resource('private-scholars', PrivateScholarsController::class);
     Route::post('/approve-applicant', [ApplicantController::class, 'approve'])->name('approve-applicant');
     Route::post('/reject-applicant', [ApplicantController::class, 'reject'])->name('reject-applicant');
     Route::post('/restore-applicant', [ApplicantController::class, 'restore'])->name('restore-applicant');
