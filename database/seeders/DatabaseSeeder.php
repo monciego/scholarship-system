@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Scholarship;
+use App\Models\SchoolYear;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LaratrustSeeder::class);
         $this->call(AdminCredentialSeeder::class);
+
 
         $representative = \App\Models\User::factory()->create([
             'name' => 'Jericho P. Bantiquete',
@@ -31,10 +35,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->addRole('user');
 
-        DB::table('school_years')->insert([
+        Scholarship::factory(10)->create();
+
+      /*   DB::table('school_years')->insert([
             'start_school_year' => '2023-06-05',
             'end_school_year' => '2024-05-10'
-        ]);
+        ]); */
 
         // \App\Models\User::factory(10)->create();
 
