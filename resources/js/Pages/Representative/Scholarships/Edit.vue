@@ -24,7 +24,9 @@ const form = useForm({
     slot: scholarship.slot,
     applicationLink: scholarship.applicationLink,
     details: scholarship.details,
-    requirements: scholarship.requirements.split("|") || [""],
+    requirements: scholarship.requirements
+        ? scholarship.requirements.split("|")
+        : [""],
 });
 
 const addRequirement = () => {
@@ -256,7 +258,10 @@ const removeRequirement = (index) => {
                         </div>
                     </div>
 
-                    <div class="sm:col-span-6 mt-4">
+                    <div
+                        class="sm:col-span-6 mt-4"
+                        v-if="form.scholarshipType === 'academic scholarship'"
+                    >
                         <div class="flex items-center">
                             <h2 class="block text-sm font-medium text-gray-700">
                                 Requirements:

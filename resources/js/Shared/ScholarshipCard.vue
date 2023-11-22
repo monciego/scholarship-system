@@ -14,10 +14,10 @@ dayjs.extend(LocalizedFormat);
         :key="scholarship.id"
         class="flex flex-col bg-white rounded-2xl shadow-xl"
         :class="
-            scholarship.slot <= scholarship.application_form.length &&
-            (scholarship.scholarshipType === 'academic scholarship' ||
-                scholarship.scholarshipType === 'government scholarship') &&
-            'border-red-700 border-4'
+            (scholarship.slot <= scholarship.application_form.length &&
+                scholarship.scholarshipType === 'government scholarship' &&
+                'border-red-700 border-4') ||
+            (scholarship.status === 'onHold' && 'border-yellow-700 border-4')
         "
     >
         <div class="flex-1 relative pt-16 px-6 pb-4 md:px-8">
@@ -55,6 +55,19 @@ dayjs.extend(LocalizedFormat);
             <h3 class="text-xl font-medium text-gray-900">
                 {{ scholarship.scholarshipName }}
             </h3>
+            <p
+                :class="
+                    scholarship.scholarshipType === 'government scholarship'
+                        ? 'bg-yellow-600'
+                        : 'bg-indigo-600 ' &&
+                          scholarship.scholarshipType === 'private scholarship'
+                        ? 'bg-slate-700'
+                        : 'bg-indigo-600 '
+                "
+                class="text-sm my-2 capitalize inline-block text-white p-1 px-4 rounded"
+            >
+                {{ scholarship.scholarshipType }}
+            </p>
             <p class="text-sm">
                 (SY)
                 {{ dayjs(scholarship.school_year.start_school_year).year() }}
@@ -90,9 +103,7 @@ dayjs.extend(LocalizedFormat);
             <button
                 v-if="
                     scholarship.slot <= scholarship.application_form.length &&
-                    (scholarship.scholarshipType === 'academic scholarship' ||
-                        scholarship.scholarshipType ===
-                            'government scholarship')
+                    scholarship.scholarshipType === 'government scholarship'
                 "
                 type="button"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -127,14 +138,18 @@ dayjs.extend(LocalizedFormat);
                         id: scholarship.id,
                     })
                 "
-                v-if="scholarship.scholarshipType === 'academic scholarship'"
+                v-else-if="
+                    scholarship.scholarshipType === 'academic scholarship'
+                "
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 Pass Requirements
             </Link>
 
             <ButtonLinkPrivate
-                v-if="scholarship.scholarshipType === 'private scholarship'"
+                v-else-if="
+                    scholarship.scholarshipType === 'private scholarship'
+                "
                 :scholarship="scholarship"
             />
         </div>
