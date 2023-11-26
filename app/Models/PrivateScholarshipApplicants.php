@@ -22,6 +22,7 @@ class PrivateScholarshipApplicants extends Model
 
         'approve',
         'reject',
+        'remarks',
     ];
 
     public function scholarship(): BelongsTo

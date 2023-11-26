@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import ApprovePrivateWithRemarks from "./ApprovePrivateWithRemarks.vue";
+import RejectPrivateWithRemarks from "./RejectPrivateWithRemarks.vue";
 defineProps(["scholars"]);
 </script>
 
@@ -61,7 +63,24 @@ defineProps(["scholars"]);
                         <td class="px-6 py-4">
                             {{ scholar.scholarship.scholarshipName }}
                         </td>
-                        <td class="px-6 py-4 truncate text-ellipsis">
+                        <td class="px-6 flex gap-1 items-center py-4">
+                            <div
+                                v-if="scholar.approve === 1"
+                                class="px-3 py-1.5 font-medium text-xs inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
+                            >
+                                Approved
+                            </div>
+                            <div
+                                v-else-if="scholar.reject === 1"
+                                class="px-3 py-1.5 font-medium text-xs inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
+                            >
+                                Rejected
+                            </div>
+                            <div v-else class="flex items-center gap-1">
+                                <ApprovePrivateWithRemarks :scholar="scholar" />
+                                <RejectPrivateWithRemarks :scholar="scholar" />
+                            </div>
+
                             <Link
                                 :href="
                                     route('private-scholars.show', {
