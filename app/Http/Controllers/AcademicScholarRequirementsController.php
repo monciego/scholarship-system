@@ -46,7 +46,7 @@ class AcademicScholarRequirementsController extends Controller
             'admission_test_score' => 'nullable',
             'email' => 'required|string|email|max:255',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
             'requirements.*' => ['required'],
         ],[

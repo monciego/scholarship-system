@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AcademicScholarRequirementsController;
 use App\Http\Controllers\AcademicScholarsController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicationFormController;
 use App\Http\Controllers\AppliedScholarships;
@@ -49,6 +50,11 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+Route::group(['middleware' => ['auth', 'role:administrator|representative']], function () {
+    Route::resource('announcement', AnnouncementController::class);
+});
+
 
 Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], function() {
     Route::get('register-representative-account', [RegisteredRepresentativeController::class, 'create'])

@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('private_scholarship_applicants', function (Blueprint $table) {
+        Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('scholarship_id')->constrained()->cascadeOnDelete();
-            $table->string('student_id');
-            $table->string('degree');
-            $table->string('email');
-            $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name');
+            $table->string('title');
+            $table->longText('body');
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('private_scholarship_applicants');
+        Schema::dropIfExists('announcements');
     }
 };

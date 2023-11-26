@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('admission_test_score')->nullable();
             $table->string('email');
             $table->string('first_name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->longText('requirements');
             $table->timestamps();
