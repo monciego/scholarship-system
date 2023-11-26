@@ -48,8 +48,11 @@ class AcademicScholarRequirementsController extends Controller
             'first_name' => 'required|string|max:255',
             'middle_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'requirements' => 'required',
+            'requirements.*' => ['required'],
+        ],[
+            'requirements.*.required' => 'The requirements field is required for all files.',
         ]);
+
 
 
         $requirements = [];
