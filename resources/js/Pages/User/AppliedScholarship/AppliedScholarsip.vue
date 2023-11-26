@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-defineProps(["appliedScholarships"]);
+defineProps(["applicants"]);
 </script>
 
 <template>
@@ -16,7 +16,7 @@ defineProps(["appliedScholarships"]);
         </header>
 
         <div
-            v-if="appliedScholarships.length === 0"
+            v-if="applicants.length === 0"
             class="flex flex-col items-center justify-center mt-16"
         >
             <img
@@ -33,12 +33,8 @@ defineProps(["appliedScholarships"]);
                 Explore & Apply for Scholarships
             </Link>
         </div>
-        <!-- -->
 
-        <div
-            v-else
-            class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg"
-        >
+        <div class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-indigo-50">
                     <tr>
@@ -51,28 +47,30 @@ defineProps(["appliedScholarships"]);
                 </thead>
                 <tbody>
                     <tr
-                        v-for="appliedScholarship of appliedScholarships"
-                        :key="appliedScholarship.id"
+                        v-for="(applicant, index) in applicants"
+                        :key="index"
                         class="bg-white border-b"
                     >
+                        <!--  {{
+                            applicant
+                        }} -->
                         <th
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                         >
-                            {{ appliedScholarship.student_id }}
+                            {{ applicant.student_id }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ appliedScholarship.scholarship.scholarshipName }}
+                            {{ applicant.scholarship.scholarshipName }}
                         </td>
                         <td class="px-6 py-4 capitalize">
-                            {{ appliedScholarship.scholarship.scholarshipType }}
+                            {{ applicant.scholarship.scholarshipType }}
                         </td>
                         <td class="px-6 py-4">
-                            <!-- {{ applicant.scholarship.scholarshipName }} -->
                             <button
                                 v-if="
-                                    appliedScholarship.approve === 0 &&
-                                    appliedScholarship.reject === 0
+                                    applicant.approve === 0 &&
+                                    applicant.reject === 0
                                 "
                                 class="px-3 py-2 cursor-default font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
                             >
@@ -80,8 +78,8 @@ defineProps(["appliedScholarships"]);
                             </button>
                             <button
                                 v-if="
-                                    appliedScholarship.approve === 1 &&
-                                    appliedScholarship.reject === 0
+                                    applicant.approve === 1 &&
+                                    applicant.reject === 0
                                 "
                                 class="px-3 py-2 cursor-default font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
                             >
@@ -89,8 +87,8 @@ defineProps(["appliedScholarships"]);
                             </button>
                             <button
                                 v-if="
-                                    appliedScholarship.approve === 0 &&
-                                    appliedScholarship.reject === 1
+                                    applicant.approve === 0 &&
+                                    applicant.reject === 1
                                 "
                                 class="px-3 py-2 cursor-default font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
                             >
@@ -101,13 +99,13 @@ defineProps(["appliedScholarships"]);
                             <Link
                                 :href="
                                     route('applied-scholarships.show', {
-                                        id: appliedScholarship.id,
+                                        id: applicant.id,
                                     })
                                 "
                                 class="font-medium ml-4 text-indigo-600 hover:underline"
                             >
-                                More</Link
-                            >
+                                More
+                            </Link>
                         </td>
                     </tr>
                 </tbody>

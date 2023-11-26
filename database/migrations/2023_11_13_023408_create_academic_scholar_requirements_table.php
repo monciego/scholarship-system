@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('academic_scholar_requirements', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 6)->primary();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('scholarship_id')->constrained()->cascadeOnDelete();
             $table->string('student_id');
