@@ -34,6 +34,7 @@ class ApplicantController extends Controller
     {
         ApplicationForm::where('id', $request->id)->update([
             'approve' => 1,
+            'remarks' => $request->remarks,
         ]);
 
         $data = [
@@ -57,6 +58,7 @@ class ApplicantController extends Controller
     {
         ApplicationForm::where('id', $request->id)->update([
             'reject' => 1,
+            'remarks' => $request->remarks,
         ]);
 
         $data = [

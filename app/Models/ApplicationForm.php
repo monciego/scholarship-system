@@ -26,6 +26,7 @@ class ApplicationForm extends Model
         'first_name',
         'middle_name',
         'last_name',
+        'remarks',
 
         /*
         'birth_date',

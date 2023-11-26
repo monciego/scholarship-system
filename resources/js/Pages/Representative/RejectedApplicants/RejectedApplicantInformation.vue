@@ -188,6 +188,21 @@ defineProps(["rejectedApplicant"]);
                     </div>
                 </div>
             </div>
+            <div v-if="rejectedApplicant.remarks" class="mt-4">
+                <span v-if="rejectedApplicant.approve === 1"> Approve</span>
+                <span v-if="rejectedApplicant.reject === 1"> Reject</span>
+                Remarks:
+
+                <div class="sm:col-span-3">
+                    <div class="mt-2">
+                        <div
+                            class="block px-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        >
+                            {{ rejectedApplicant.remarks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </AuthenticatedLayout>
 </template>

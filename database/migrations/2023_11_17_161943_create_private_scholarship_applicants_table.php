@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-
+            $table->string('remarks')->nullable();
             $table->boolean('approve')->default(0)->nullable(); // approve as scholar
             $table->boolean('reject')->default(0)->nullable(); // reject application form
             $table->timestamps();

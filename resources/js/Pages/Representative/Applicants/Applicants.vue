@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import ApproveApplicantsWithRemarks from "./ApproveApplicantsWithRemarks.vue";
+import RejectApplicantsWithRemarksVue from "./RejectApplicantsWithRemarks.vue";
 defineProps(["applicants"]);
 
 const approveForm = useForm({
@@ -70,77 +72,12 @@ const rejectForm = useForm({
                             {{ applicant.scholarship.scholarshipName }}
                         </td>
                         <td class="px-6 flex gap-1 items-center py-4">
-                            <form
-                                @submit.prevent="
-                                    approveForm
-                                        .transform((data) => ({
-                                            ...data,
-                                            name: applicant.first_name,
-                                            scholarshipName:
-                                                applicant.scholarship
-                                                    .scholarshipName,
-                                            email: applicant.email,
-                                            id: applicant.id,
-                                        }))
-                                        .post(route('approve-applicant'))
-                                "
-                            >
-                                <input
-                                    type="hidden"
-                                    name="id"
-                                    v-model="approveForm.id"
-                                />
-                                <input
-                                    class="hidden"
-                                    v-model="approveForm.approve"
-                                    type="checkbox"
-                                    disabled="disabled"
-                                    name="approve"
-                                />
-                                <button
-                                    type="submit"
-                                    class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
-                                >
-                                    <span class="xs:block text-xs"
-                                        >Approve</span
-                                    >
-                                </button>
-                            </form>
-                            <form
-                                @submit.prevent="
-                                    rejectForm
-                                        .transform((data) => ({
-                                            ...data,
-                                            name: applicant.first_name,
-                                            scholarshipName:
-                                                applicant.scholarship
-                                                    .scholarshipName,
-                                            email: applicant.email,
-                                            id: applicant.id,
-                                        }))
-                                        .post(route('reject-applicant'))
-                                "
-                            >
-                                <input
-                                    type="hidden"
-                                    name="id"
-                                    v-model="rejectForm.id"
-                                />
-                                <input
-                                    class="hidden"
-                                    v-model="rejectForm.reject"
-                                    type="checkbox"
-                                    disabled="disabled"
-                                    name="reject"
-                                />
-                                <button
-                                    type="submit"
-                                    class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white"
-                                >
-                                    <span class="xs:block text-xs">Reject</span>
-                                </button>
-                            </form>
-
+                            <ApproveApplicantsWithRemarks
+                                :applicant="applicant"
+                            />
+                            <RejectApplicantsWithRemarksVue
+                                :applicant="applicant"
+                            />
                             <Link
                                 :href="
                                     route('applicants.show', {
