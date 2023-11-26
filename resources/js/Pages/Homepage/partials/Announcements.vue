@@ -44,27 +44,4 @@ defineProps(["announcements"]);
             </svg>
         </Link>
     </div>
-
-    <!--     <div
-            v-for="announcement in announcements"
-            :key="announcement.id"
-            class="flex flex-col relative bg-white rounded-2xl shadow-xl"
-        >
-            <div class="flex-1 relative pt-8 px-6 pb-8 md:px-8">
-                <h3 class="text-xl font-medium text-gray-900">
-                    {{ announcement.title }}
-                </h3>
-
-                <Link
-                    :href="
-                        route('announcement.show', {
-                            id: announcement.id,
-                        })
-                    "
-                    class="text-base font-medium block pt-4 text-indigo-700 hover:text-indigo-600"
-                >
-                    More Details <span aria-hidden="true"> &rarr;</span>
-                </Link>
-            </div>
-        </div> -->
 </template>
