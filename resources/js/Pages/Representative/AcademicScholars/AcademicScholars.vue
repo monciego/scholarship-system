@@ -38,9 +38,6 @@ defineProps(["scholars"]);
                         <th scope="col" class="px-6 py-3">Student ID</th>
                         <th scope="col" class="px-6 py-3">Scholar's Name</th>
                         <th scope="col" class="px-6 py-3">Scholarship</th>
-                        <th scope="col" class="px-6 py-3">
-                            Status Requirements
-                        </th>
                         <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
                 </thead>
@@ -64,21 +61,7 @@ defineProps(["scholars"]);
                         <td class="px-6 py-4">
                             {{ scholar.scholarship.scholarshipName }}
                         </td>
-                        <td class="px-6 py-4">
-                            <span
-                                class="text-red-700"
-                                v-if="
-                                    scholar.scholarship.requirements.split('|')
-                                        .length >
-                                    JSON.parse(scholar.requirements).length
-                                "
-                            >
-                                Incomplete
-                            </span>
-                            <span class="text-indigo-700" v-else>
-                                Complete
-                            </span>
-                        </td>
+
                         <td class="px-6 py-4 truncate text-ellipsis">
                             <Link
                                 :href="

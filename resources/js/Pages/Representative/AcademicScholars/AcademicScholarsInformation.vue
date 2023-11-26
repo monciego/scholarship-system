@@ -209,23 +209,6 @@ const closeModal = () => {
 
             <div class="flex mt-6 gap-2 items-center">
                 <h2>Requirements:</h2>
-                <div>
-                    <div
-                        v-if="
-                            scholar.scholarship.requirements.split('|').length >
-                            files.length
-                        "
-                        class="bg-red-700 text-white rounded py-1 px-4 text-xs"
-                    >
-                        Incomplete
-                    </div>
-                    <div
-                        v-else
-                        class="bg-indigo-700 text-white rounded py-1 px-4 text-xs"
-                    >
-                        Complete
-                    </div>
-                </div>
             </div>
             <div
                 v-for="(file, fileIndex) in files"
