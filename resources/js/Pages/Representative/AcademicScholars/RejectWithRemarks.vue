@@ -3,7 +3,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import Modal from "@/Components/Modal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 defineProps(["scholar"]);
 
@@ -22,6 +22,8 @@ const confirmRejectApplicant = () => {
 const closeModal = () => {
     confirmingRejection.value = false;
 };
+
+const isRemarksNotEmpty = computed(() => rejectForm.remarks.trim() !== "");
 </script>
 
 <template>
@@ -85,8 +87,13 @@ const closeModal = () => {
                             type="submit"
                             class="px-3 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
                         >
-                            <span class="xs:block text-xs"
-                                >Submit and Reject</span
+                            <span
+                                v-if="isRemarksNotEmpty"
+                                class="xs:block text-xs"
+                                >Submit and reject</span
+                            >
+                            <span v-else class="xs:block text-xs"
+                                >Reject without remarks</span
                             >
                         </button>
                     </div>
