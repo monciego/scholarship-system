@@ -19,6 +19,9 @@ class PrivateScholarshipApplicants extends Model
         'first_name',
         'middle_name',
         'last_name',
+
+        'approve',
+        'reject',
     ];
 
     public function scholarship(): BelongsTo

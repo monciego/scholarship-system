@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApprovedApplicantEmail;
+use App\Mail\RejectedApplicantEmail;
 use App\Models\AcademicScholarRequirements;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class AcademicScholarsController extends Controller
@@ -19,6 +23,51 @@ class AcademicScholarsController extends Controller
             })->latest()->get()
         ]);
     }
+
+
+    public function approve(Request $request)
+    {
+        AcademicScholarRequirements::where('id', $request->id)->update([
+            'approve' => 1,
+            'remarks' => $request->remarks,
+        ]);
+
+        $data = [
+            'scholarshipName' => $request->scholarshipName,
+            'email' => $request->email,
+            'name' => $request->name,
+            'representativeName' => Auth::user()->name,
+            'representativeEmail' => Auth::user()->email,
+        ];
+
+        Mail::to($data['email'])->send(new ApprovedApplicantEmail($data));
+
+        return redirect(route('academic-scholars.index'))->with('success', 'Application approved!');
+    }
+
+    /**
+     * Reject application
+     */
+
+    public function reject(Request $request)
+    {
+        AcademicScholarRequirements::where('id', $request->id)->update([
+            'reject' => 1,
+            'remarks' => $request->remarks,
+        ]);
+
+        $data = [
+            'scholarshipName' => $request->scholarshipName,
+            'email' => $request->email,
+            'name' => $request->name,
+            'representativeEmail' => Auth::user()->email,
+        ];
+
+        Mail::to($data['email'])->send(new RejectedApplicantEmail($data));
+
+        return redirect(route('academic-scholars.index'))->with('success', 'Application Rejected!');
+    }
+
 
     /**
      * Show the form for creating a new resource.

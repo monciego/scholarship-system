@@ -25,6 +25,9 @@ class AcademicScholarRequirements extends Model
         'middle_name',
         'last_name',
         'requirements',
+        'remarks',
+        'approve',
+        'reject',
     ];
 
     public function scholarship(): BelongsTo
