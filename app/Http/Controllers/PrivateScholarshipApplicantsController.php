@@ -35,7 +35,7 @@ class PrivateScholarshipApplicantsController extends Controller
             'degree' => 'required',
             'email' => 'required',
             'first_name' => 'required',
-            'middle_name' => 'required',
+            'middle_name' => 'nullable',
             'last_name' => 'required',
         ]);
 
