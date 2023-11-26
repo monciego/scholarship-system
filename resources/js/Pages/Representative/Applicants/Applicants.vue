@@ -4,16 +4,6 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import ApproveApplicantsWithRemarks from "./ApproveApplicantsWithRemarks.vue";
 import RejectApplicantsWithRemarksVue from "./RejectApplicantsWithRemarks.vue";
 defineProps(["applicants"]);
-
-const approveForm = useForm({
-    id: "",
-    approve: true,
-});
-
-const rejectForm = useForm({
-    id: "",
-    reject: true,
-});
 </script>
 
 <template>
