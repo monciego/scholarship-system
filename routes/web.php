@@ -17,6 +17,7 @@ use App\Http\Controllers\ScholarController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\SchoolYearController;
 use App\Models\AcademicScholarRequirements;
+use App\Models\Announcement;
 use App\Models\PrivateScholarshipApplicants;
 use App\Models\Scholarship;
 use Illuminate\Foundation\Application;
@@ -42,10 +43,12 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'scholarships' => Scholarship::where('deadlineAt', '>=', $now)->where('status', '=', 'available')->orWhere('status','onHold')->with('representative', 'applicationForm')->latest()->get()
+        'scholarships' => Scholarship::where('deadlineAt', '>=', $now)->where('status', '=', 'available')->orWhere('status','onHold')->with('representative', 'applicationForm')->latest()->get(),
+        'announcements' => Announcement::latest()->get()
     ]);
 })->name('homepage.index');
 
+Route::get('/announcements/{announcement}', [AnnouncementController::class, 'showAnnouncement'])->name('showAnnouncement');
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

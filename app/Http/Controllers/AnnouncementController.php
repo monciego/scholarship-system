@@ -57,6 +57,16 @@ class AnnouncementController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function showAnnouncement(Announcement $announcement)
+    {
+        return Inertia::render('Homepage/partials/AnnouncementInfo', [
+            'announcement' => $announcement
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Announcement $announcement)
