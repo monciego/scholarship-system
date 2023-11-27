@@ -207,25 +207,24 @@ const closeModal = () => {
                 </div>
             </div>
 
-            <div class="flex mt-6 gap-2 items-center">
-                <h2>Requirements:</h2>
-                <div>
-                    <div
-                        v-if="
-                            scholar.scholarship.requirements.split('|').length >
-                            files.length
-                        "
-                        class="bg-red-700 text-white rounded py-1 px-4 text-xs"
-                    >
-                        Incomplete
-                    </div>
-                    <div
-                        v-else
-                        class="bg-indigo-700 text-white rounded py-1 px-4 text-xs"
-                    >
-                        Complete
+            <div v-if="scholar.remarks" class="mt-4">
+                <span v-if="scholar.approve === 1"> Approve</span>
+                <span v-if="scholar.reject === 1"> Reject</span>
+                Remarks:
+
+                <div class="sm:col-span-3">
+                    <div class="mt-2">
+                        <div
+                            class="block px-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        >
+                            {{ scholar.remarks }}
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="flex mt-6 gap-2 items-center">
+                <h2>Requirements:</h2>
             </div>
             <div
                 v-for="(file, fileIndex) in files"

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('application_forms', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 6)->primary();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('scholarship_id')->constrained()->cascadeOnDelete();
             $table->string('student_id');
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name');
 
+            $table->string('remarks')->nullable();
             $table->boolean('approve')->default(0)->nullable(); // approve as scholar
             $table->boolean('reject')->default(0)->nullable(); // reject application form
             $table->timestamps();

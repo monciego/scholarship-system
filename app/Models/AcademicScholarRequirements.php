@@ -9,7 +9,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class AcademicScholarRequirements extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = static::generateRandomId();
+        });
+    }
+
+    private static function generateRandomId()
+    {
+        // Logic to generate a random 6-character string
+        return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 6);
+    }
     protected $fillable = [
         'scholarship_id',
         'user_id',
@@ -25,6 +42,9 @@ class AcademicScholarRequirements extends Model
         'middle_name',
         'last_name',
         'requirements',
+        'remarks',
+        'approve',
+        'reject',
     ];
 
     public function scholarship(): BelongsTo

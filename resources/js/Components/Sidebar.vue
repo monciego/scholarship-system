@@ -220,7 +220,7 @@ import { Link } from "@inertiajs/vue3";
                     </NavLink>
                     <NavLink
                         v-if="$page.props.role.user"
-                        :href="route('announcement.index')"
+                        :href="route('applied-scholarships.index')"
                         :active="route().current('applied-scholarships.*')"
                     >
                         <svg

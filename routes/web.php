@@ -76,6 +76,12 @@ Route::group(['middleware' => ['auth', 'role:representative', 'verified']], func
     Route::post('/approve-applicant', [ApplicantController::class, 'approve'])->name('approve-applicant');
     Route::post('/reject-applicant', [ApplicantController::class, 'reject'])->name('reject-applicant');
     Route::post('/restore-applicant', [ApplicantController::class, 'restore'])->name('restore-applicant');
+    // academic scholarship
+    Route::post('/approve-academic', [AcademicScholarsController::class, 'approve'])->name('approve-academic');
+    Route::post('/reject-academic', [AcademicScholarsController::class, 'reject'])->name('reject-academic');
+    // private scholarship
+    Route::post('/approve-private', [PrivateScholarsController::class, 'approve'])->name('approve-private');
+    Route::post('/reject-private', [PrivateScholarsController::class, 'reject'])->name('reject-private');
 });
 
 Route::group(['middleware' => ['auth', 'role:user', 'verified']], function() {
