@@ -25,15 +25,22 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jericho P. Bantiquete',
             'email' => 'representative@psu.edu.ph',
             'password' => Hash::make('representative@psu.edu.ph'),
+            'id_number' => 123124,
+            'number_of_studying_siblings' => null,
+            'house_hold_per_capita_income' => '412412',
+            'birthday' => '1990-01-01',
+            'have_existing_scholarship' => null,
+            'othersInput' => null,
+            'age' => null,
         ]);
         $representative->addRole('representative');
 
-        $user = \App\Models\User::factory()->create([
+  /*       $user = \App\Models\User::factory()->create([
             'name' => 'John Doe',
             'email' => 'johndoe@psu.edu.ph',
             'password' => Hash::make('johndoe@psu.edu.ph'),
         ]);
-        $user->addRole('user');
+        $user->addRole('user'); */
 
         Scholarship::factory(10)->create();
 
