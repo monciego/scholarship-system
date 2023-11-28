@@ -16,7 +16,9 @@ class DashboardController extends Controller
         /** @var \App\Models\User */
         $user = Auth::user();
         if ($user->hasRole('user')) {
-            return Inertia::render('User/Dashboard/Dashboard');
+            $userData = User::where('id', auth()->user()->id)->firstOrFail();
+            $existing_scholarships = json_decode($userData->have_existing_scholarship, true);
+            return Inertia::render('User/Dashboard/Dashboard', compact('userData', 'existing_scholarships'));
         } elseif ($user->hasRole('administrator')) {
             $scholarshipCount = Scholarship::count();
             $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();

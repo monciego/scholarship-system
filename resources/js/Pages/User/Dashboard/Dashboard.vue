@@ -3,6 +3,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
 
+defineProps(["userData", "existing_scholarships"]);
+
 const currentTime = ref(new Date());
 const greetings = [
     "Have a wonderful day ahead!",
@@ -58,6 +60,11 @@ const greeting = computed(() => {
                         {{ $page.props.auth.user.name }} !
                     </h2>
                     <p class="text-white">{{ greeting }}</p>
+                </div>
+
+                <p class="pt-4">Existing Scholarships</p>
+                <div v-for="(value, key) in existing_scholarships" :key="key">
+                    <div v-if="value === true">- {{ key }}</div>
                 </div>
             </div>
         </div>

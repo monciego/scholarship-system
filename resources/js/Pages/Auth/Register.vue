@@ -1,23 +1,64 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import { computed } from "vue";
 
 const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    id_number: "",
+    number_of_studying_siblings: "",
+    house_hold_per_capita_income: "",
+    birthday: "",
+    have_existing_scholarship: {
+        TDP: "TDP",
+        TES: "TES",
+        ACSP: "ACSP",
+        DOLE: "DOLE",
+        VIRGINIAN_SCHOLARSHIP: "VIRGINIAN_SCHOLARSHIP",
+        SM_MEGAWORLD: "SM_MEGAWORLD",
+        others: "",
+    },
+    othersInput: "",
+    age: "",
 });
 
 const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+    form.post(route("register"), {
+        calculatedAge: calculatedAge.value,
+        house_hold_per_capita_income: form.house_hold_per_capita_income,
+        onFinish: () => form.reset("password", "password_confirmation"),
     });
 };
+const calculatedAge = computed(() => {
+    if (form.birthday) {
+        const today = new Date();
+        const birthDate = new Date(form.birthday);
+        let age = today.getFullYear() - birthDate.getFullYear();
+
+        // Check if the birthday hasn't occurred yet this year
+        if (
+            today.getMonth() < birthDate.getMonth() ||
+            (today.getMonth() === birthDate.getMonth() &&
+                today.getDate() < birthDate.getDate())
+        ) {
+            age--;
+        }
+
+        // Update form.age
+        form.age = age.toString();
+
+        return age.toString();
+    }
+
+    return "";
+});
 </script>
 
 <template>
@@ -57,6 +98,147 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
+                <InputLabel for="id_number" value="ID Number" />
+
+                <TextInput
+                    id="id_number"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.id_number"
+                    required
+                    autocomplete="id_number"
+                />
+
+                <InputError class="mt-2" :message="form.errors.id_number" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel
+                    for="number_of_studying_siblings"
+                    value="Number of Studying Siblings"
+                />
+
+                <TextInput
+                    id="number_of_studying_siblings"
+                    type="number"
+                    class="mt-1 block w-full"
+                    v-model="form.number_of_studying_siblings"
+                    required
+                    autocomplete="number_of_studying_siblings"
+                />
+
+                <InputError
+                    class="mt-2"
+                    :message="form.errors.number_of_studying_siblings"
+                />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="birthday" value="Birthday" />
+
+                <TextInput
+                    id="birthday"
+                    type="date"
+                    class="mt-1 block w-full"
+                    v-model="form.birthday"
+                    required
+                    autocomplete="birthday"
+                />
+                <InputError class="mt-2" :message="form.errors.birthday" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="age" value="Age" />
+
+                <TextInput
+                    id="age"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.age"
+                    required
+                    autocomplete="age"
+                    readonly
+                />
+                <InputError class="mt-2" :message="form.errors.age" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel
+                    for="house_hold_per_capita_income"
+                    value="Household Per Capita Income"
+                />
+                <select
+                    class="border-gray-300 w-full mt-1 block focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                    name="house_hold_per_capita_income"
+                    id="house_hold_per_capita_income"
+                    v-model="form.house_hold_per_capita_income"
+                >
+                    <option selected value="120000">Below ₱120,000.00</option>
+                    <option value="121000">₱121,000.00 to ₱250,000.00</option>
+                    <option value="251000">₱251,000.00 to ₱500,000.00</option>
+                    <option value="50000">₱500,000.00 and above</option>
+                </select>
+
+                <InputError
+                    class="mt-2"
+                    :message="form.errors.house_hold_per_capita_income"
+                />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel
+                    for="have_existing_scholarship"
+                    value="Have Existing Scholarship?"
+                />
+
+                <div class="mt-6 space-y-6">
+                    <div
+                        v-for="have_existing_scholarship in Object.keys(
+                            form.have_existing_scholarship
+                        )"
+                        :key="have_existing_scholarship"
+                        class="relative flex gap-x-3"
+                    >
+                        <div class="flex h-6 items-center">
+                            <input
+                                :id="have_existing_scholarship"
+                                :name="have_existing_scholarship"
+                                type="checkbox"
+                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                v-model="
+                                    form.have_existing_scholarship[
+                                        have_existing_scholarship
+                                    ]
+                                "
+                            />
+                        </div>
+                        <div class="text-sm leading-6">
+                            <label
+                                :for="have_existing_scholarship"
+                                class="font-medium text-gray-900"
+                            >
+                                {{ have_existing_scholarship }}
+                            </label>
+                        </div>
+                        <div>
+                            <TextInput
+                                v-if="
+                                    have_existing_scholarship === 'others' &&
+                                    form.have_existing_scholarship.others
+                                "
+                                v-model="form.othersInput"
+                                type="text"
+                                :id="'othersInput'"
+                                :name="'have_existing_scholarship_others'"
+                                class="mt-1 w-full"
+                                placeholder="Specify others"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
                 <InputLabel for="password" value="Password" />
 
                 <TextInput
@@ -72,7 +254,10 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel
+                    for="password_confirmation"
+                    value="Confirm Password"
+                />
 
                 <TextInput
                     id="password_confirmation"
@@ -82,8 +267,10 @@ const submit = () => {
                     required
                     autocomplete="new-password"
                 />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                <InputError
+                    class="mt-2"
+                    :message="form.errors.password_confirmation"
+                />
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -94,7 +281,11 @@ const submit = () => {
                     Already registered?
                 </Link>
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton
+                    class="ml-4"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Register
                 </PrimaryButton>
             </div>
