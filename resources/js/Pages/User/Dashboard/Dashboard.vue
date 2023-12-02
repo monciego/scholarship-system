@@ -2,8 +2,16 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
+import ExistingScholarsips from "./partials/user/ExistingScholarship.vue";
+import Announcements from "./partials/user/Announcements.vue";
+import ScholarshipCard from "@/Shared/ScholarshipCard.vue";
 
-defineProps(["userData", "existing_scholarships"]);
+const props = defineProps([
+    "userData",
+    "existing_scholarships",
+    "announcements",
+    "scholarshipRecommendations",
+]);
 
 const currentTime = ref(new Date());
 const greetings = [
@@ -28,6 +36,12 @@ const timeOfDay = computed(() => {
         return "evening";
     }
 });
+
+const filteredScholarships = computed(() =>
+    Object.keys(props.existing_scholarships).filter(
+        (key) => props.existing_scholarships[key] === true
+    )
+);
 
 const greeting = computed(() => {
     const greetingIndex =
@@ -57,14 +71,28 @@ const greeting = computed(() => {
                             Good Afternoon,
                         </span>
                         <span v-else> Good Evening, </span>
-                        {{ $page.props.auth.user.name }} !
+                        {{ $page.props.auth.user.name }}!
                     </h2>
                     <p class="text-white">{{ greeting }}</p>
                 </div>
 
-                <p class="pt-4">Existing Scholarships</p>
-                <div v-for="(value, key) in existing_scholarships" :key="key">
-                    <div v-if="value === true">- {{ key }}</div>
+                <div class="grid mt-6 grid-cols-12 gap-6">
+                    <ExistingScholarsips
+                        :filteredScholarships="filteredScholarships"
+                    />
+                    <Announcements :announcements="announcements" />
+                </div>
+
+                <h2 class="mt-8 text-lg font-bold">
+                    Scholarship Recommendations
+                </h2>
+
+                <div
+                    class="grid mt-16 grid-cols-1 lg:grid-cols-2 gap-y-16 lg:gap-x-8"
+                >
+                    <ScholarshipCard
+                        :scholarships="scholarshipRecommendations"
+                    />
                 </div>
             </div>
         </div>
