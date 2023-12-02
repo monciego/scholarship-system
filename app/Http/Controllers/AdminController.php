@@ -235,14 +235,10 @@ class AdminController extends Controller
         ]);
     }
 
-   /*  'applicants' => ApplicationForm::where('approve', 0)->where('reject', 0)->withWhereHas('scholarship', function ($query) {
-        return $query->where('user_id', auth()->user()->id);
-    })->latest()->get() */
-
     // Registered Users
     public function registeredUsers() {
-
+        return Inertia::render('Administrator/RegisteredUsers/RegisteredUsers', [
+            'registeredUsers' => User::with('scholarships')->whereHasRole('user')->latest()->get()
+        ]);
     }
-
-
 }

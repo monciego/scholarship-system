@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
     Route::get('total-of-rejected-applicants', [AdminController::class, 'rejectedApplicants'])->name('total-of-rejected-applicants');
     Route::get('total-of-rejected-applicants/{id}', [AdminController::class, 'rejectedApplicantsShow'])->name('total-of-rejected-applicants.show');
     Route::get('total-of-representatives', [AdminController::class, 'representatives'])->name('total-representatives');
-    Route::get('total-of-registered-users', [AdminController::class, 'registeredUsers']);
+    Route::get('total-of-registered-users', [AdminController::class, 'registeredUsers'])->name('registeredUsers');
 });
 
 Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {
