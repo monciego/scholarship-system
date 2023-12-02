@@ -70,12 +70,19 @@ class DashboardController extends Controller
 
             return Inertia::render('User/Dashboard/Dashboard', compact('userData', 'scholarshipRecommendations', 'existing_scholarships', 'announcements'));
         } elseif ($user->hasRole('administrator')) {
+            // scholarship count
             $scholarshipCount = Scholarship::count();
-            $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();
-            $governmentApplicant = ApplicationForm::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
-            $privateApplicant = PrivateScholarshipApplicants::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
-            $academicApplicant = AcademicScholarRequirements::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
-            $scholarsCount = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant)->count();
+            // applicants count
+            $governmentApplicant = ApplicationForm::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
+            $privateApplicant = PrivateScholarshipApplicants::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
+            $academicApplicant = AcademicScholarRequirements::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
+            $applicantsCount = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant)->count();
+
+            // scholars count
+            $governmentScholar = ApplicationForm::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $privateScholar = PrivateScholarshipApplicants::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $academicScholar = AcademicScholarRequirements::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $scholarsCount = $governmentScholar->merge($privateScholar)->merge($academicScholar)->count();
 
             $rejectScholarsCount = ApplicationForm::where('approve', 0)->where('reject', 1)->count();
             $representativeCount = User::whereHasRole('representative')->count();
