@@ -67,7 +67,8 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
     Route::resource('school-year', SchoolYearController::class);
     Route::get('total-of-scholarships', [AdminController::class, 'scholarships'])->name('total-of-scholarships');
     Route::get('total-of-scholarships/{scholarship}', [AdminController::class, 'scholarshipShow'])->name('total-of-scholarships.show');
-    Route::get('total-of-scholars', [AdminController::class, 'scholars']);
+    Route::get('total-of-scholars', [AdminController::class, 'scholars'])->name('total-of-scholars');
+    Route::get('total-of-scholars/{id}', [AdminController::class, 'scholarShow'])->name('total-of-scholars.show');
     Route::get('total-of-applicants', [AdminController::class, 'applicants']);
     Route::get('total-of-rejected-applicants', [AdminController::class, 'rejectedApplicants']);
     Route::get('total-of-representatives', [AdminController::class, 'representatives']);

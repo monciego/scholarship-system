@@ -156,13 +156,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('total-of-scholars')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Scholars</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
