@@ -25,7 +25,7 @@ class AdminController extends Controller
         ]);
     }
     public function scholars() {
-        $governmentApplicant = ApplicationForm::with('scholarship')->get();
+        $governmentApplicant = ApplicationForm::with('scholarship')->where('approve', 1)->get();
         $privateApplicant = PrivateScholarshipApplicants::with('scholarship')->where('approve', 1)->get();
         $academicApplicant = AcademicScholarRequirements::with('scholarship')->where('approve', 1)->get();
 
