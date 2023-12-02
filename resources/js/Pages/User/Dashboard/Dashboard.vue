@@ -2,8 +2,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
+import ExistingScholarsips from "./partials/user/ExistingScholarship.vue";
 
-defineProps(["userData", "existing_scholarships"]);
+const props = defineProps(["userData", "existing_scholarships"]);
 
 const currentTime = ref(new Date());
 const greetings = [
@@ -28,6 +29,12 @@ const timeOfDay = computed(() => {
         return "evening";
     }
 });
+
+const filteredScholarships = computed(() =>
+    Object.keys(props.existing_scholarships).filter(
+        (key) => props.existing_scholarships[key] === true
+    )
+);
 
 const greeting = computed(() => {
     const greetingIndex =
@@ -62,9 +69,10 @@ const greeting = computed(() => {
                     <p class="text-white">{{ greeting }}</p>
                 </div>
 
-                <p class="pt-4">Existing Scholarships</p>
-                <div v-for="(value, key) in existing_scholarships" :key="key">
-                    <div v-if="value === true">- {{ key }}</div>
+                <div class="grid mt-6 grid-cols-12 gap-6">
+                    <ExistingScholarsips
+                        :filteredScholarships="filteredScholarships"
+                    />
                 </div>
             </div>
         </div>
