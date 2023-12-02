@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicScholarRequirements;
 use App\Models\Announcement;
 use App\Models\ApplicationForm;
+use App\Models\PrivateScholarshipApplicants;
 use App\Models\Scholarship;
 use App\Models\User;
 use League\Csv\Reader;
@@ -70,7 +72,11 @@ class DashboardController extends Controller
         } elseif ($user->hasRole('administrator')) {
             $scholarshipCount = Scholarship::count();
             $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();
-            $scholarsCount = ApplicationForm::where('approve', 1)->where('reject', 0)->count();
+            $governmentApplicant = ApplicationForm::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $privateApplicant = PrivateScholarshipApplicants::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $academicApplicant = AcademicScholarRequirements::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $scholarsCount = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant)->count();
+
             $rejectScholarsCount = ApplicationForm::where('approve', 0)->where('reject', 1)->count();
             $representativeCount = User::whereHasRole('representative')->count();
             $registeredUsersCount = User::whereHasRole('user')->count();
