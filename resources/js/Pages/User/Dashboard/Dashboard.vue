@@ -2,8 +2,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
-import ExistingScholarsips from "./partials/user/ExistingScholarship.vue";
-import Announcements from "./partials/user/Announcements.vue";
+import ExistingScholarsips from "./partials/ExistingScholarship.vue";
+import Announcements from "./partials/Announcements.vue";
 import ScholarshipCard from "@/Shared/ScholarshipCard.vue";
 
 const props = defineProps([
