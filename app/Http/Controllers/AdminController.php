@@ -6,6 +6,7 @@ use App\Models\AcademicScholarRequirements;
 use App\Models\ApplicationForm;
 use App\Models\PrivateScholarshipApplicants;
 use App\Models\Scholarship;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -227,14 +228,18 @@ class AdminController extends Controller
         return $governmentApplicant->merge($privateApplicant)->merge($academicApplicant);
     }
 
-
-
-
-
-
+    // Representatives
     public function representatives() {
-
+        return Inertia::render('Administrator/Representatives/Representatives', [
+            'representatives' => User::with('scholarships')->whereHasRole('representative')->latest()->get()
+        ]);
     }
+
+   /*  'applicants' => ApplicationForm::where('approve', 0)->where('reject', 0)->withWhereHas('scholarship', function ($query) {
+        return $query->where('user_id', auth()->user()->id);
+    })->latest()->get() */
+
+    // Registered Users
     public function registeredUsers() {
 
     }
