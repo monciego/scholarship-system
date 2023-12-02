@@ -5,7 +5,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 
 const form = useForm({
     name: "",
@@ -59,107 +59,121 @@ const calculatedAge = computed(() => {
 
     return "";
 });
+
+watch(
+    () => form.birthday,
+    () => {
+        calculatedAge.value; // This will trigger the reactivity
+    }
+);
 </script>
 
 <template>
     <GuestLayout>
         <Head title="Register" />
-
+        <h2 class="text-base font-semibold leading-7 text-gray-900">
+            Register
+        </h2>
+        <p class="mt-1 text-sm leading-6 text-gray-600">
+            Use a permanent email address where you can receive emails.
+        </p>
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
+                <div class="sm:col-span-3">
+                    <InputLabel for="name" value="Name" />
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+                    <TextInput
+                        id="name"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.name"
+                        required
+                        autofocus
+                        autocomplete="name"
+                    />
 
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
+                    <InputError class="mt-2" :message="form.errors.name" />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <div class="sm:col-span-3">
+                    <InputLabel for="email" value="University Email" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
+                    <TextInput
+                        id="email"
+                        type="email"
+                        class="mt-1 block w-full"
+                        v-model="form.email"
+                        required
+                        autocomplete="username"
+                    />
 
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+                    <InputError class="mt-2" :message="form.errors.email" />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="id_number" value="ID Number" />
+                <div class="sm:col-span-3">
+                    <InputLabel for="id_number" value="ID Number" />
 
-                <TextInput
-                    id="id_number"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.id_number"
-                    required
-                    autocomplete="id_number"
-                />
+                    <TextInput
+                        id="id_number"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.id_number"
+                        required
+                        autocomplete="id_number"
+                    />
 
-                <InputError class="mt-2" :message="form.errors.id_number" />
-            </div>
+                    <InputError class="mt-2" :message="form.errors.id_number" />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel
-                    for="number_of_studying_siblings"
-                    value="Number of Studying Siblings"
-                />
+                <div class="sm:col-span-3">
+                    <InputLabel
+                        for="number_of_studying_siblings"
+                        value="Number of Studying Siblings"
+                    />
 
-                <TextInput
-                    id="number_of_studying_siblings"
-                    type="number"
-                    class="mt-1 block w-full"
-                    v-model="form.number_of_studying_siblings"
-                    required
-                    autocomplete="number_of_studying_siblings"
-                />
+                    <TextInput
+                        id="number_of_studying_siblings"
+                        type="number"
+                        class="mt-1 block w-full"
+                        v-model="form.number_of_studying_siblings"
+                        required
+                        autocomplete="number_of_studying_siblings"
+                    />
 
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.number_of_studying_siblings"
-                />
-            </div>
+                    <InputError
+                        class="mt-2"
+                        :message="form.errors.number_of_studying_siblings"
+                    />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="birthday" value="Birthday" />
+                <div class="sm:col-span-3">
+                    <InputLabel for="birthday" value="Birthday" />
 
-                <TextInput
-                    id="birthday"
-                    type="date"
-                    class="mt-1 block w-full"
-                    v-model="form.birthday"
-                    required
-                    autocomplete="birthday"
-                />
-                <InputError class="mt-2" :message="form.errors.birthday" />
-            </div>
+                    <TextInput
+                        id="birthday"
+                        type="date"
+                        class="mt-1 block w-full"
+                        v-model="form.birthday"
+                        required
+                        autocomplete="birthday"
+                    />
+                    <InputError class="mt-2" :message="form.errors.birthday" />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="age" value="Age" />
+                <div class="sm:col-span-3">
+                    <InputLabel for="age" value="Age" />
 
-                <TextInput
-                    id="age"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.age"
-                    required
-                    autocomplete="age"
-                    readonly
-                />
-                <InputError class="mt-2" :message="form.errors.age" />
+                    <TextInput
+                        id="age"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.age"
+                        required
+                        autocomplete="age"
+                        readonly
+                    />
+                    <InputError class="mt-2" :message="form.errors.age" />
+                </div>
             </div>
 
             <div class="mt-4">
@@ -197,28 +211,35 @@ const calculatedAge = computed(() => {
                             form.have_existing_scholarship
                         )"
                         :key="have_existing_scholarship"
-                        class="relative flex gap-x-3"
+                        class="relative"
                     >
-                        <div class="flex h-6 items-center">
-                            <input
-                                :id="have_existing_scholarship"
-                                :name="have_existing_scholarship"
-                                type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                v-model="
-                                    form.have_existing_scholarship[
-                                        have_existing_scholarship
-                                    ]
-                                "
-                            />
-                        </div>
-                        <div class="text-sm leading-6">
-                            <label
-                                :for="have_existing_scholarship"
-                                class="font-medium text-gray-900"
-                            >
-                                {{ have_existing_scholarship }}
-                            </label>
+                        <div class="flex gap-x-3">
+                            <div class="flex h-6 items-center">
+                                <input
+                                    :id="have_existing_scholarship"
+                                    :name="have_existing_scholarship"
+                                    type="checkbox"
+                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    v-model="
+                                        form.have_existing_scholarship[
+                                            have_existing_scholarship
+                                        ]
+                                    "
+                                />
+                            </div>
+                            <div class="text-sm leading-6">
+                                <label
+                                    :for="have_existing_scholarship"
+                                    class="font-medium text-gray-900 capitalize"
+                                >
+                                    {{
+                                        have_existing_scholarship.replace(
+                                            /_/g,
+                                            " "
+                                        )
+                                    }}
+                                </label>
+                            </div>
                         </div>
                         <div>
                             <TextInput
@@ -230,7 +251,7 @@ const calculatedAge = computed(() => {
                                 type="text"
                                 :id="'othersInput'"
                                 :name="'have_existing_scholarship_others'"
-                                class="mt-1 w-full"
+                                class="mt-4 w-full capitalize"
                                 placeholder="Specify others"
                             />
                         </div>
