@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AcademicScholarRequirementsController;
 use App\Http\Controllers\AcademicScholarsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicationFormController;
@@ -64,6 +65,16 @@ Route::group(['middleware' => ['auth', 'role:administrator', 'verified']], funct
     ->name('register.representative');
     Route::post('register-representative-account', [RegisteredRepresentativeController::class, 'store']);
     Route::resource('school-year', SchoolYearController::class);
+    Route::get('total-of-scholarships', [AdminController::class, 'scholarships'])->name('total-of-scholarships');
+    Route::get('total-of-scholarships/{scholarship}', [AdminController::class, 'scholarshipShow'])->name('total-of-scholarships.show');
+    Route::get('total-of-scholars', [AdminController::class, 'scholars'])->name('total-of-scholars');
+    Route::get('total-of-scholars/{id}', [AdminController::class, 'scholarShow'])->name('total-of-scholars.show');
+    Route::get('total-of-applicants', [AdminController::class, 'applicants'])->name('total-of-applicants');
+    Route::get('total-of-applicants/{id}', [AdminController::class, 'applicantsShow'])->name('total-of-applicants.show');
+    Route::get('total-of-rejected-applicants', [AdminController::class, 'rejectedApplicants'])->name('total-of-rejected-applicants');
+    Route::get('total-of-rejected-applicants/{id}', [AdminController::class, 'rejectedApplicantsShow'])->name('total-of-rejected-applicants.show');
+    Route::get('total-of-representatives', [AdminController::class, 'representatives'])->name('total-representatives');
+    Route::get('total-of-registered-users', [AdminController::class, 'registeredUsers'])->name('registeredUsers');
 });
 
 Route::group(['middleware' => ['auth', 'role:representative', 'verified']], function() {

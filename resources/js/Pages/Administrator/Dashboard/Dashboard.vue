@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
 
 defineProps([
@@ -109,13 +109,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('total-of-scholarships')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Scholarships</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
@@ -156,13 +156,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('total-of-scholars')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Scholars</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
@@ -203,13 +203,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('total-of-applicants')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Applicants</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
@@ -250,13 +250,15 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="
+                                        route('total-of-rejected-applicants')
+                                    "
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Rejected Applicants</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
@@ -297,13 +299,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('total-representatives')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Representatives</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
@@ -344,13 +346,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('registeredUsers')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Users</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicScholarRequirements;
 use App\Models\Announcement;
 use App\Models\ApplicationForm;
+use App\Models\PrivateScholarshipApplicants;
 use App\Models\Scholarship;
 use App\Models\User;
 use League\Csv\Reader;
@@ -68,11 +70,26 @@ class DashboardController extends Controller
 
             return Inertia::render('User/Dashboard/Dashboard', compact('userData', 'scholarshipRecommendations', 'existing_scholarships', 'announcements'));
         } elseif ($user->hasRole('administrator')) {
+            // scholarship count
             $scholarshipCount = Scholarship::count();
-            $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();
-            $scholarsCount = ApplicationForm::where('approve', 1)->where('reject', 0)->count();
-            $rejectScholarsCount = ApplicationForm::where('approve', 0)->where('reject', 1)->count();
+            // applicants count
+            $governmentApplicant = ApplicationForm::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
+            $privateApplicant = PrivateScholarshipApplicants::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
+            $academicApplicant = AcademicScholarRequirements::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
+            $applicantsCount = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant)->count();
+            // scholars count
+            $governmentScholar = ApplicationForm::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $privateScholar = PrivateScholarshipApplicants::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $academicScholar = AcademicScholarRequirements::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
+            $scholarsCount = $governmentScholar->merge($privateScholar)->merge($academicScholar)->count();
+            // rejected applicants count
+            $rejectedGovernmentScholar = ApplicationForm::with('scholarship')->where('approve', 0)->where('reject', 1)->get();
+            $rejectedPrivateScholar = PrivateScholarshipApplicants::with('scholarship')->where('approve', 0)->where('reject', 1)->get();
+            $rejectedAcademicScholar = AcademicScholarRequirements::with('scholarship')->where('approve', 0)->where('reject', 1)->get();
+            $rejectScholarsCount = $rejectedGovernmentScholar->merge($rejectedPrivateScholar)->merge($rejectedAcademicScholar)->count();
+            // representative count
             $representativeCount = User::whereHasRole('representative')->count();
+            // registered user count
             $registeredUsersCount = User::whereHasRole('user')->count();
             return Inertia::render('Administrator/Dashboard/Dashboard', compact('scholarshipCount', 'registeredUsersCount', 'representativeCount', 'scholarsCount', 'applicantsCount','rejectScholarsCount'));
         } elseif ($user->hasRole('representative')) {
