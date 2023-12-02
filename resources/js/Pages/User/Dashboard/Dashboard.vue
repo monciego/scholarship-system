@@ -3,8 +3,13 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
 import ExistingScholarsips from "./partials/user/ExistingScholarship.vue";
+import Announcements from "./partials/user/Announcements.vue";
 
-const props = defineProps(["userData", "existing_scholarships"]);
+const props = defineProps([
+    "userData",
+    "existing_scholarships",
+    "announcements",
+]);
 
 const currentTime = ref(new Date());
 const greetings = [
@@ -73,6 +78,7 @@ const greeting = computed(() => {
                     <ExistingScholarsips
                         :filteredScholarships="filteredScholarships"
                     />
+                    <Announcements :announcements="announcements" />
                 </div>
             </div>
         </div>
