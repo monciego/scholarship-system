@@ -9,7 +9,19 @@ defineProps(["filteredScholarships"]);
         <header class="px-5 py-4 border-b border-gray-100">
             <h2 class="font-semibold text-gray-800">Existing Scholarship</h2>
         </header>
-        <div class="p-3">
+
+        <div
+            v-if="filteredScholarships.length === 0"
+            class="flex flex-col gap-8 items-center justify-center mt-4"
+        >
+            <img
+                class="h-24"
+                src="/images/empty-state/empty-illustration.svg"
+            />
+            <h2 class="text-center uppercase">No Existing Scholarship</h2>
+        </div>
+
+        <div v-else class="p-3">
             <div>
                 <ul class="my-1">
                     <li
