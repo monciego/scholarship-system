@@ -77,15 +77,19 @@ class DashboardController extends Controller
             $privateApplicant = PrivateScholarshipApplicants::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
             $academicApplicant = AcademicScholarRequirements::with('scholarship')->where('approve', 0)->where('reject', 0)->get();
             $applicantsCount = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant)->count();
-
             // scholars count
             $governmentScholar = ApplicationForm::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
             $privateScholar = PrivateScholarshipApplicants::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
             $academicScholar = AcademicScholarRequirements::with('scholarship')->where('approve', 1)->where('reject', 0)->get();
             $scholarsCount = $governmentScholar->merge($privateScholar)->merge($academicScholar)->count();
-
-            $rejectScholarsCount = ApplicationForm::where('approve', 0)->where('reject', 1)->count();
+            // rejected applicants count
+            $rejectedGovernmentScholar = ApplicationForm::with('scholarship')->where('approve', 0)->where('reject', 1)->get();
+            $rejectedPrivateScholar = PrivateScholarshipApplicants::with('scholarship')->where('approve', 0)->where('reject', 1)->get();
+            $rejectedAcademicScholar = AcademicScholarRequirements::with('scholarship')->where('approve', 0)->where('reject', 1)->get();
+            $rejectScholarsCount = $rejectedGovernmentScholar->merge($rejectedPrivateScholar)->merge($rejectedAcademicScholar)->count();
+            // representative count
             $representativeCount = User::whereHasRole('representative')->count();
+            // registered user count
             $registeredUsersCount = User::whereHasRole('user')->count();
             return Inertia::render('Administrator/Dashboard/Dashboard', compact('scholarshipCount', 'registeredUsersCount', 'representativeCount', 'scholarsCount', 'applicantsCount','rejectScholarsCount'));
         } elseif ($user->hasRole('representative')) {
