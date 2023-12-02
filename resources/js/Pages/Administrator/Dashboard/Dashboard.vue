@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
 
 defineProps([
@@ -109,13 +109,13 @@ const greeting = computed(() => {
                             class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
                         >
                             <div class="text-sm">
-                                <a
-                                    href="#"
+                                <Link
+                                    :href="route('total-of-scholarships')"
                                     class="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                     View all<span class="sr-only">
                                         Scholarships</span
-                                    ></a
+                                    ></Link
                                 >
                             </div>
                         </div>
