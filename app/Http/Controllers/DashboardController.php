@@ -60,7 +60,13 @@ class DashboardController extends Controller
 
             $prediction = $classifier->predict([$house_hold_per_capita_income, $number_of_studying_siblings]);
 
-            return Inertia::render('User/Dashboard/Dashboard', compact('userData', 'existing_scholarships', 'announcements'));
+            if($prediction === 'Government') {
+                $scholarshipRecommendations = Scholarship::with('representative')->where('scholarshipType', "government scholarship")->latest()->get();
+            } else {
+                $scholarshipRecommendations = Scholarship::with('representative')->where('scholarshipType', "private scholarship")->latest()->get();
+            }
+
+            return Inertia::render('User/Dashboard/Dashboard', compact('userData', 'scholarshipRecommendations', 'existing_scholarships', 'announcements'));
         } elseif ($user->hasRole('administrator')) {
             $scholarshipCount = Scholarship::count();
             $applicantsCount = ApplicationForm::where('approve', 0)->where('reject', 0)->count();

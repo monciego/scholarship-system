@@ -4,11 +4,13 @@ import { Head } from "@inertiajs/vue3";
 import { ref, onMounted, computed } from "vue";
 import ExistingScholarsips from "./partials/user/ExistingScholarship.vue";
 import Announcements from "./partials/user/Announcements.vue";
+import ScholarshipCard from "@/Shared/ScholarshipCard.vue";
 
 const props = defineProps([
     "userData",
     "existing_scholarships",
     "announcements",
+    "scholarshipRecommendations",
 ]);
 
 const currentTime = ref(new Date());
@@ -79,6 +81,18 @@ const greeting = computed(() => {
                         :filteredScholarships="filteredScholarships"
                     />
                     <Announcements :announcements="announcements" />
+                </div>
+
+                <h2 class="mt-8 text-lg font-bold">
+                    Scholarship Recommendations
+                </h2>
+
+                <div
+                    class="grid mt-16 grid-cols-1 lg:grid-cols-2 gap-y-16 lg:gap-x-8"
+                >
+                    <ScholarshipCard
+                        :scholarships="scholarshipRecommendations"
+                    />
                 </div>
             </div>
         </div>
