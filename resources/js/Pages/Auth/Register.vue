@@ -5,7 +5,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 
 const form = useForm({
     name: "",
@@ -59,6 +59,13 @@ const calculatedAge = computed(() => {
 
     return "";
 });
+
+watch(
+    () => form.birthday,
+    () => {
+        calculatedAge.value; // This will trigger the reactivity
+    }
+);
 </script>
 
 <template>
