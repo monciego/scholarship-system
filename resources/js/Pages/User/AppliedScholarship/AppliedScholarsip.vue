@@ -1,11 +1,11 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 defineProps(["applicants"]);
 </script>
 
 <template>
-    <Head title="Applicants" />
+    <Head title="Applied Scholarship" />
     <AuthenticatedLayout>
         <header
             class="border-b border-slate-100 flex justify-between items-center"

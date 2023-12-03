@@ -1,13 +1,12 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import { ref } from "vue";
 
 defineProps(["scholar"]);
 </script>
 
 <template>
-    <Head title="Scholar Information" />
+    <Head title="Private Scholar Information" />
     <AuthenticatedLayout>
         <section class="mx-auto pt-5 pb-8 px-4 sm:px-6">
             <header class="flex items-center justify-between">

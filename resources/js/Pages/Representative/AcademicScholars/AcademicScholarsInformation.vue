@@ -24,7 +24,7 @@ const closeModal = () => {
 </script>
 
 <template>
-    <Head title="Scholar Information" />
+    <Head title="Academic Scholar Information" />
     <AuthenticatedLayout>
         <section class="mx-auto pt-5 pb-8 px-4 sm:px-6">
             <header class="flex items-center justify-between">

@@ -76,7 +76,7 @@ const addPost = (scholarshipName, details) => {
 };
 </script>
 <template>
-    <Head title="Scholarships" />
+    <Head title="Create Scholarship" />
     <AuthenticatedLayout>
         <form
             @submit.prevent="submit"

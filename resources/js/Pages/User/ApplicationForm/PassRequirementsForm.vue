@@ -1,6 +1,5 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
-import ModalMessage from "@/Components/ModalMessage.vue";
 import PassedRequirementMessage from "@/Components/PassedRequirementMessage.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import dayjs from "dayjs";
@@ -35,7 +34,7 @@ const onFileChange = (index, event) => {
 </script>
 
 <template>
-    <Head title="Application Form" />
+    <Head title="Requirements Submission Form" />
     <PassedRequirementMessage />
 
     <section class="max-w-7xl mx-auto pt-5 pb-8 px-4 sm:px-6 x">

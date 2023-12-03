@@ -9,7 +9,7 @@ defineProps(["rejectedApplicant", "decodedRequirements"]);
 </script>
 
 <template>
-    <Head title="Applied Scholarship Information" />
+    <Head title="Rejected Applicant Information" />
     <AuthenticatedLayout>
         <section class="pb-20">
             <div class="space-y-6 sm:space-y-5">

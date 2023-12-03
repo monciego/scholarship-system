@@ -1,19 +1,19 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import ApproveWithRemarks from "./ApproveWithRemarks.vue";
 import RejectWithRemarks from "./RejectWithRemarks.vue";
 defineProps(["scholars"]);
 </script>
 
 <template>
-    <Head title="Scholars" />
+    <Head title="Academic Scholars" />
     <AuthenticatedLayout>
         <header
             class="border-b border-slate-100 flex justify-between items-center"
         >
             <h2 class="font-semibold text-lg text-slate-800">
-                Academmic Scholars
+                Academic Scholars
             </h2>
         </header>
 
