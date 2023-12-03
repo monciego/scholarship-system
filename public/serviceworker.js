@@ -50,3 +50,17 @@ self.addEventListener("fetch", (event) => {
             })
     );
 });
+
+self.addEventListener("push", (event) => {
+    const options = {
+        body: event.data.text(),
+        icon: "https://upload.wikimedia.org/wikipedia/en/7/75/Pangasinan_State_University_logo.png",
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(
+            "New Scholarship Available!",
+            options
+        )
+    );
+});
