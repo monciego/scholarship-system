@@ -6,7 +6,7 @@ defineProps(["rejectedApplicant"]);
 </script>
 
 <template>
-    <Head title="Rejected Applicants" />
+    <Head title="Rejected Applicant" />
     <AuthenticatedLayout>
         <section class="mx-auto pt-5 pb-8 px-4 sm:px-6">
             <header class="flex items-center justify-between">

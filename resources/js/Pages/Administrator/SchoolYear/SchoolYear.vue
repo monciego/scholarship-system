@@ -27,7 +27,7 @@ const form = useForm({
 });
 </script>
 <template>
-    <Head title="Scholarships" />
+    <Head title="School Years" />
 
     <AuthenticatedLayout>
         <header

@@ -8,9 +8,9 @@ import Footer from "@/Shared/Auth/Footer.vue";
         class="min-h-screen flex flex-col sm:justify-center items-center bg-gray-100"
     >
         <Header />
-        <div class="sm:mx-auto px-6 sm:px-0 mt-28 sm:mt-10 w-full sm:max-w-3xl">
+        <div class="sm:mx-auto px-6 sm:px-0 mt-28 sm:mt-10 w-full sm:max-w-lg">
             <div
-                class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 h-[22rem] overflow-y-scroll"
+                class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 overflow-y-scroll"
             >
                 <slot />
             </div>

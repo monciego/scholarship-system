@@ -11,7 +11,7 @@ const form = useForm({
 });
 </script>
 <template>
-    <Head title="Scholarships" />
+    <Head title="Create Annnouncement" />
     <AuthenticatedLayout>
         <form
             @submit.prevent="

@@ -10,7 +10,7 @@ const restoreForm = useForm({
 </script>
 
 <template>
-    <Head title="Scholars" />
+    <Head title="Rejected Applicants" />
     <AuthenticatedLayout>
         <header
             class="border-b border-slate-100 flex justify-between items-center"

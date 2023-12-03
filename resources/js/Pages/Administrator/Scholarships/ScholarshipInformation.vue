@@ -9,7 +9,7 @@ dayjs.extend(LocalizedFormat);
 defineProps(["scholarship"]);
 </script>
 <template>
-    <Head title="Scholarships" />
+    <Head title="Scholarship Information" />
 
     <AuthenticatedLayout>
         <div>

@@ -1,13 +1,13 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import ApprovePrivateWithRemarks from "./ApprovePrivateWithRemarks.vue";
 import RejectPrivateWithRemarks from "./RejectPrivateWithRemarks.vue";
 defineProps(["scholars"]);
 </script>
 
 <template>
-    <Head title="Scholars" />
+    <Head title="Private Scholars" />
     <AuthenticatedLayout>
         <header
             class="border-b border-slate-100 flex justify-between items-center"

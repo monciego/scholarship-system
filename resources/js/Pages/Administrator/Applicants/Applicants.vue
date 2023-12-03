@@ -5,7 +5,7 @@ defineProps(["applicants"]);
 </script>
 
 <template>
-    <Head title="Scholars" />
+    <Head title="Applicants" />
     <AuthenticatedLayout>
         <header
             class="border-b border-slate-100 flex justify-between items-center"
