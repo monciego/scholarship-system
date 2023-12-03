@@ -16,7 +16,7 @@ defineProps(["announcements"]);
             <div>
                 <Link
                     :href="route('announcement.create')"
-                    class="px-4 py-2 font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
+                    class="px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-700 hover:bg-indigo-600 text-white"
                 >
                     <span class="xs:block text-sm mr-2">Add Announcement</span>
                     <svg

@@ -24,7 +24,7 @@ const submit = () => {
 <template>
     <AuthenticatedLayout>
         <Head title="Register Representative" />
-        <div class="sm:mx-auto px-2 sm:px-0 mt-8 w-full sm:max-w-xl">
+        <div class="sm:mx-auto px-2 sm:px-0 w-full sm:max-w-xl">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <h2 class="text-sm sm:text-base mb-6">
                     Register Representative Account
