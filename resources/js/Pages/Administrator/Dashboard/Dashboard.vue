@@ -64,7 +64,7 @@ const greeting = computed(() => {
                             Good Afternoon,
                         </span>
                         <span v-else> Good Evening, </span>
-                        {{ $page.props.auth.user.name }} !
+                        {{ $page.props.auth.user.name }}!
                     </h2>
                     <p class="text-white">{{ greeting }}</p>
                 </div>
