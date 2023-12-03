@@ -58,7 +58,7 @@ defineProps(["scholarships"]);
                         <td class="px-6 py-4 capitalize">
                             {{ scholarship.representative.name }}
                         </td>
-                        <td class="px-6 flex gap-1 items-center py-4">
+                        <td class="px-6 py-4">
                             <Link
                                 :href="
                                     route('total-of-scholarships.show', {
