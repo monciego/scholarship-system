@@ -95,7 +95,7 @@ defineProps(["applicants"]);
                                 <span class="xs:block text-xs">Rejected</span>
                             </button>
                         </td>
-                        <td class="px-6 flex gap-1 items-center py-4">
+                        <td class="px-6 py-4">
                             <Link
                                 :href="
                                     route('applied-scholarships.show', {
