@@ -4,7 +4,7 @@ return [
     'name' => 'Scholarship System',
     'manifest' => [
         'name' => env('APP_NAME', 'Scholarship System'),
-        'short_name' => 'PWA',
+        'short_name' => 'Scholarship System',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
