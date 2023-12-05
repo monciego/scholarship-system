@@ -93,7 +93,9 @@ defineProps(["scholarship"]);
                             scholarship.scholarshipType !==
                                 'academic scholarship' &&
                             scholarship.scholarshipType !==
-                                'private scholarship'
+                                'private scholarship' &&
+                            scholarship.scholarshipType !==
+                                'government scholarship'
                         "
                         class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                     >

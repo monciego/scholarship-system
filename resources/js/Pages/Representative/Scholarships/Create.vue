@@ -243,7 +243,10 @@ const addPost = (scholarshipName, details) => {
                         <div
                             class="sm:col-span-3"
                             v-if="
-                                form.scholarshipType !== 'private scholarship'
+                                form.scholarshipType !==
+                                    'private scholarship' &&
+                                form.scholarshipType !==
+                                    'government scholarship'
                             "
                         >
                             <InputLabel for="slot" value="Available Slots" />

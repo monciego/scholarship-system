@@ -87,7 +87,10 @@ dayjs.extend(LocalizedFormat);
             <div class="mt-2">
                 <p
                     v-if="
-                        scholarship.scholarshipType === 'government scholarship'
+                        scholarship.scholarshipType !==
+                            'academic scholarship' &&
+                        scholarship.scholarshipType !== 'private scholarship' &&
+                        scholarship.scholarshipType !== 'government scholarship'
                     "
                 >
                     Slots: {{ scholarship.application_form.length }} /
