@@ -16,6 +16,8 @@ const form = useForm({
     id_number: "",
     number_of_studying_siblings: "",
     house_hold_per_capita_income: "",
+    address: "",
+    year_level: "",
     birthday: "",
     have_existing_scholarship: {
         TDP: "TDP",
@@ -162,6 +164,42 @@ watch(
                                 :message="
                                     form.errors.number_of_studying_siblings
                                 "
+                            />
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <InputLabel for="address" value="Address" />
+
+                            <TextInput
+                                id="address"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.address"
+                                required
+                                autocomplete="address"
+                            />
+
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.address"
+                            />
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <InputLabel for="year_level" value="Year Level" />
+
+                            <TextInput
+                                id="year_level"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.year_level"
+                                required
+                                autocomplete="year_level"
+                            />
+
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.year_level"
                             />
                         </div>
 

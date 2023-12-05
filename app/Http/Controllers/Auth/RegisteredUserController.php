@@ -31,7 +31,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
@@ -41,15 +40,10 @@ class RegisteredUserController extends Controller
             'house_hold_per_capita_income' => 'nullable|string|max:255',
             'birthday' => 'nullable|date',
             'have_existing_scholarship' => 'nullable',
-  /*           'have_existing_scholarship.TDP' => 'nullable|boolean',
-            'have_existing_scholarship.TES' => 'nullable|boolean',
-            'have_existing_scholarship.ACSP' => 'nullable|boolean',
-            'have_existing_scholarship.DOLE' => 'nullable|boolean',
-            'have_existing_scholarship.VIRGINIAN_SCHOLARSHIP' => 'nullable|boolean',
-            'have_existing_scholarship.SM_MEGAWORLD' => 'nullable|boolean', */
-            // 'have_existing_scholarship.others' => 'nullable|boolean',
             'othersInput' => 'nullable|string|max:255',
             'age' => 'nullable|numeric',
+            'address' => 'nullable|string|max:255',
+            'year_level' => 'nullable|string|max:255',
         ]);
 
 
@@ -66,6 +60,8 @@ class RegisteredUserController extends Controller
             'have_existing_scholarship' => $haveExistingScholarship,
             'othersInput' => $request->othersInput,
             'age' => $request->age,
+            'address' => $request->address,
+            'year_level' => $request->year_level,
         ];
 
 

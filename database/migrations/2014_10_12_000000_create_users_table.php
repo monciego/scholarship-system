@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('have_existing_scholarship')->nullable();
             $table->string('othersInput')->nullable();
             $table->string('age')->nullable(); // auto generated
+            $table->string('address')->nullable();
+            $table->string('year_level')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
