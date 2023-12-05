@@ -61,7 +61,7 @@ const restoreForm = useForm({
                         <td class="px-6 py-4">
                             {{ applicant.last_name }},
                             {{ applicant.first_name }}
-                            {{ applicant.middle_name.charAt(0) }}.
+                            {{ applicant.middle_name?.charAt(0) }}.
                         </td>
                         <td class="px-6 py-4">
                             {{ applicant.scholarship.scholarshipName }}
