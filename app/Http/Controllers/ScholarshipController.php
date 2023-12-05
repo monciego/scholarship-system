@@ -46,7 +46,7 @@ class ScholarshipController extends Controller
             'status' => 'required',
             'slot' => 'nullable',
             'applicationLink' => 'nullable|string|max:255',
-            'details' => 'nullable|string|max:255',
+            'details' => 'nullable',
             'scholarshipType' => 'nullable|string|max:255',
             'requirements' => 'nullable',
         ]);
@@ -107,7 +107,7 @@ class ScholarshipController extends Controller
             'slot' => 'nullable',
             'applicationLink' => 'nullable|string|max:255',
             'scholarshipType' => 'nullable|string|max:255',
-            'details' => 'nullable|string|max:255',
+            'details' => 'nullable',
             'requirements' => 'nullable',
         ]);
 
