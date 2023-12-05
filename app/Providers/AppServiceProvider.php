@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Announcement;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+            $announcements = Announcement::all();
+
+            Inertia::share('announcements', $announcements);
     }
 }

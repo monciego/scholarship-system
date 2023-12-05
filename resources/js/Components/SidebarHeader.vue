@@ -4,7 +4,9 @@ import { ref } from "vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
+import DropDownNotification from "./DropDownNotification.vue";
 const showingNavigationDropdown = ref(false);
+defineProps(["announcements"]);
 </script>
 
 <template>
@@ -33,9 +35,13 @@ const showingNavigationDropdown = ref(false);
                     />
                 </svg>
             </button>
-            <div class="flex-1 px-4 flex justify-between">
+
+            <div class="flex-1 px-4 flex items-center justify-between">
                 <div class="flex-1 flex"></div>
-                <div class="ml-4 flex items-center md:ml-6">
+                <div v-if="$page.props.role.user">
+                    <DropDownNotification :announcements="announcements" />
+                </div>
+                <div class="flex items-center">
                     <!-- Settings Dropdown -->
                     <div class="ml-3 relative">
                         <Dropdown align="right" width="48">
