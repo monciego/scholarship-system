@@ -57,7 +57,7 @@ defineProps(["rejectedApplicants"]);
                         <td class="px-6 py-4">
                             {{ rejectedApplicant.last_name }},
                             {{ rejectedApplicant.first_name }}
-                            {{ rejectedApplicant.middle_name.charAt(0) }}.
+                            {{ rejectedApplicant.middle_name?.charAt(0) }}.
                         </td>
                         <td class="px-6 py-4">
                             {{ rejectedApplicant.scholarship.scholarshipName }}

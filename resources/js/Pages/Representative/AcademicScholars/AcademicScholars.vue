@@ -58,7 +58,7 @@ defineProps(["scholars"]);
                         <td class="px-6 py-4">
                             {{ scholar.last_name }},
                             {{ scholar.first_name }}
-                            {{ scholar.middle_name.charAt(0) }}.
+                            {{ scholar.middle_name?.charAt(0) }}.
                         </td>
                         <td class="px-6 py-4">
                             {{ scholar.scholarship.scholarshipName }}
