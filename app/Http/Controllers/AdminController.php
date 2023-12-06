@@ -6,6 +6,7 @@ use App\Models\AcademicScholarRequirements;
 use App\Models\ApplicationForm;
 use App\Models\PrivateScholarshipApplicants;
 use App\Models\Scholarship;
+use App\Models\SchoolYear;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -32,7 +33,9 @@ class AdminController extends Controller
 
         $scholars = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant);
 
-        return Inertia::render('Administrator/Scholars/Scholars', compact('scholars'));
+        $schoolYears = SchoolYear::all();
+
+        return Inertia::render('Administrator/Scholars/Scholars', compact('scholars', 'schoolYears'));
     }
 
     public function scholarShow($id)
