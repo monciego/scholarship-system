@@ -174,7 +174,9 @@ class AdminController extends Controller
 
         $rejectedApplicants = $governmentApplicant->merge($privateApplicant)->merge($academicApplicant);
 
-        return Inertia::render('Administrator/Rejected-Applicants/RejectedApplicants', compact('rejectedApplicants'));
+        $schoolYears = SchoolYear::all();
+
+        return Inertia::render('Administrator/Rejected-Applicants/RejectedApplicants', compact('rejectedApplicants', 'schoolYears'));
     }
 
     public function rejectedApplicantsShow($id)

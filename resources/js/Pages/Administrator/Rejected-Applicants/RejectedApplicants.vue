@@ -1,7 +1,34 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
-defineProps(["rejectedApplicants"]);
+const props = defineProps(["rejectedApplicants", "schoolYears"]);
+
+import { computed, ref } from "vue";
+const selectedScholarship = ref("all");
+const selectedSchoolYear = ref("all");
+import dayjs from "dayjs";
+
+const filteredRejectedApplicants = computed(() => {
+    let applicants = props.rejectedApplicants;
+
+    if (selectedScholarship.value && selectedScholarship.value !== "all") {
+        applicants = applicants.filter(
+            (applicant) =>
+                applicant.scholarship.scholarshipType ===
+                selectedScholarship.value
+        );
+    }
+
+    if (selectedSchoolYear.value && selectedSchoolYear.value !== "all") {
+        applicants = applicants.filter(
+            (applicant) =>
+                applicant.scholarship.school_year.id.toString() ===
+                selectedSchoolYear.value
+        );
+    }
+
+    return applicants;
+});
 </script>
 
 <template>
@@ -13,6 +40,55 @@ defineProps(["rejectedApplicants"]);
             <h2 class="font-semibold text-lg text-slate-800">
                 Rejected Applicants
             </h2>
+
+            <div class="flex items-center gap-2">
+                <label
+                    for="scholarshipFilter"
+                    class="block text-sm sr-only font-medium leading-6 text-gray-900"
+                    >Filter By Scholarship</label
+                >
+                <div class="mt-2">
+                    <select
+                        id="scholarshipFilter"
+                        v-model="selectedScholarship"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                        <option value="all">All Scholarships</option>
+                        <option value="academic scholarship">
+                            Academic Scholarship
+                        </option>
+                        <option value="government scholarship">
+                            Government Scholarship
+                        </option>
+                        <option value="private scholarship">
+                            Private Scholarship
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mt-2">
+                    <label
+                        for="schoolYearFilter"
+                        class="block text-sm sr-only font-medium leading-6 text-gray-900"
+                        >Filter By School Year</label
+                    >
+                    <select
+                        id="schoolYearFilter"
+                        v-model="selectedSchoolYear"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                        <option value="all">All School Years</option>
+                        <option
+                            v-for="year in schoolYears"
+                            :key="year.id"
+                            :value="year.id.toString()"
+                        >
+                            {{ dayjs(year.start_school_year).year() }} -
+                            {{ dayjs(year.end_school_year).year() }}
+                        </option>
+                    </select>
+                </div>
+            </div>
         </header>
 
         <div
@@ -44,7 +120,7 @@ defineProps(["rejectedApplicants"]);
                 </thead>
                 <tbody>
                     <tr
-                        v-for="rejectedApplicant of rejectedApplicants"
+                        v-for="rejectedApplicant of filteredRejectedApplicants"
                         :key="rejectedApplicant.id"
                         class="bg-white border-b"
                     >
