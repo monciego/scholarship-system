@@ -16,7 +16,8 @@ class AdminController extends Controller
 {
     public function scholarships() {
         return Inertia::render('Administrator/Scholarships/Scholarships', [
-            "scholarships" => Scholarship::with('representative')->latest()->get()
+            "scholarships" => Scholarship::with('representative')->latest()->get(),
+            "schoolYears" => SchoolYear::all()
         ]);
     }
 
