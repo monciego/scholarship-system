@@ -3,7 +3,22 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import ApproveApplicantsWithRemarks from "./ApproveApplicantsWithRemarks.vue";
 import RejectApplicantsWithRemarksVue from "./RejectApplicantsWithRemarks.vue";
-defineProps(["applicants"]);
+import { computed, ref } from "vue";
+const props = defineProps(["applicants"]);
+
+const selectedScholarship = ref("all");
+
+const filteredApplicants = computed(() => {
+    if (!selectedScholarship.value || selectedScholarship.value === "all") {
+        return props.applicants;
+    }
+    return props.applicants.filter(
+        (applicant) =>
+            applicant.scholarship.scholarshipType === selectedScholarship.value
+    );
+});
+
+console.log(filteredApplicants);
 </script>
 
 <template>
@@ -13,6 +28,32 @@ defineProps(["applicants"]);
             class="border-b border-slate-100 flex justify-between items-center"
         >
             <h2 class="font-semibold text-lg text-slate-800">Applicants</h2>
+
+            <div>
+                <label
+                    for="scholarshipFilter"
+                    class="block text-sm sr-only font-medium leading-6 text-gray-900"
+                    >Filter By Scholarship</label
+                >
+                <div class="mt-2">
+                    <select
+                        id="scholarshipFilter"
+                        v-model="selectedScholarship"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                        <option value="all">All Scholarships</option>
+                        <option value="academic scholarship">
+                            Academic Scholarship
+                        </option>
+                        <option value="government scholarship">
+                            Government Scholarship
+                        </option>
+                        <option value="private scholarship">
+                            Private Scholarship
+                        </option>
+                    </select>
+                </div>
+            </div>
         </header>
 
         <div
@@ -43,7 +84,7 @@ defineProps(["applicants"]);
                 </thead>
                 <tbody>
                     <tr
-                        v-for="applicant of applicants"
+                        v-for="applicant of filteredApplicants"
                         :key="applicant.id"
                         class="bg-white border-b"
                     >
