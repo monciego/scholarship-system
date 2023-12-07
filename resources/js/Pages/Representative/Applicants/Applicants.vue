@@ -4,6 +4,13 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import ApproveApplicantsWithRemarks from "./ApproveApplicantsWithRemarks.vue";
 import RejectApplicantsWithRemarksVue from "./RejectApplicantsWithRemarks.vue";
 defineProps(["applicants"]);
+
+const isGraduated = (scholar) => {
+    const currentYear = new Date().getFullYear();
+    const enrollmentYear = parseInt(scholar.student_id.substring(0, 2)) + 2000;
+    const courseDuration = 4; // Assuming a 4-year course, adjust as needed
+    return currentYear - enrollmentYear >= courseDuration;
+};
 </script>
 
 <template>
@@ -78,6 +85,12 @@ defineProps(["applicants"]);
                             >
                                 More</Link
                             >
+                            <span
+                                v-if="isGraduated(applicant)"
+                                class="px-3 ml-2 py-1.5 font-medium text-xs inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-green-700 hover:bg-green-600 text-white"
+                            >
+                                Graduated
+                            </span>
                         </td>
                     </tr>
                 </tbody>
