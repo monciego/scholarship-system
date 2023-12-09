@@ -15,7 +15,7 @@ const form = useForm({
     password_confirmation: "",
     id_number: "",
     number_of_studying_siblings: "",
-    house_hold_per_capita_income: "",
+    monthly_income: "",
     address: "",
     year_level: "",
     birthday: "",
@@ -35,7 +35,7 @@ const form = useForm({
 const submit = () => {
     form.post(route("register"), {
         calculatedAge: calculatedAge.value,
-        house_hold_per_capita_income: form.house_hold_per_capita_income,
+        monthly_income: form.monthly_income,
         onFinish: () => form.reset("password", "password_confirmation"),
     });
 };
@@ -241,32 +241,37 @@ watch(
 
                     <div class="mt-4">
                         <InputLabel
-                            for="house_hold_per_capita_income"
-                            value="Household Per Capita Income"
+                            for="monthly_income"
+                            value="Monthly Income"
                         />
                         <select
                             class="border-gray-300 w-full mt-1 block focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            name="house_hold_per_capita_income"
-                            id="house_hold_per_capita_income"
-                            v-model="form.house_hold_per_capita_income"
+                            name="monthly_income"
+                            id="monthly_income"
+                            v-model="form.monthly_income"
                         >
-                            <option selected value="19999">
-                                Below ₱120,000.00
+                            <option selected value="9000">
+                                9,100 or lower/month
                             </option>
-                            <option value="121000">
-                                ₱121,000.00 to ₱250,000.00
+                            <option value="9100">9,100 to 18,200/month</option>
+                            <option value="18200">
+                                18,200 to 36,400/ month
                             </option>
-                            <option value="251000">
-                                ₱251,000.00 to ₱500,000.00
+                            <option value="36400">
+                                36,400 to 63,700/ month
                             </option>
-                            <option value="500000">
-                                ₱500,000.00 and above
+                            <option value="63700">
+                                63,700 to 109,200/month
                             </option>
+                            <option value="109200">
+                                109,200 to 182,000/ month
+                            </option>
+                            <option value="182000">Above 182,000/ month</option>
                         </select>
 
                         <InputError
                             class="mt-2"
-                            :message="form.errors.house_hold_per_capita_income"
+                            :message="form.errors.monthly_income"
                         />
                     </div>
 

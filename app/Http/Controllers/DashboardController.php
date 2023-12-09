@@ -57,10 +57,13 @@ class DashboardController extends Controller
             $classifier->train($samples, $labels);
 
 
-            $house_hold_per_capita_income = User::where('id', auth()->user()->id)->value('house_hold_per_capita_income');
+            $monthly_income = User::where('id', auth()->user()->id)->value('monthly_income');
+            $annual_income = $monthly_income * 12;
+
             $number_of_studying_siblings = User::where('id', auth()->user()->id)->value('number_of_studying_siblings');
 
-            $prediction = $classifier->predict([$house_hold_per_capita_income, $number_of_studying_siblings]);
+            $prediction = $classifier->predict([$annual_income, $number_of_studying_siblings]);
+
 
             if($prediction === 'Government') {
                 $scholarshipRecommendations = Scholarship::with('representative')->where('scholarshipType', "government scholarship")->latest()->get();

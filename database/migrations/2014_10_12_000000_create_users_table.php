@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('id_number');
             $table->string('number_of_studying_siblings')->nullable();
-            $table->string('house_hold_per_capita_income'); // family income annual
+            $table->string('monthly_income'); // family income annual
             $table->string('birthday');
             $table->string('have_existing_scholarship')->nullable();
             $table->string('othersInput')->nullable();

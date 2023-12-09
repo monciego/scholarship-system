@@ -19,7 +19,7 @@ class AdminCredentialSeeder extends Seeder
             'password' => Hash::make('administrator@psu.edu.ph'),
             'id_number' => 123124,
             'number_of_studying_siblings' => null,
-            'house_hold_per_capita_income' => '412412',
+            'monthly_income' => '00000',
             'birthday' => '1990-01-01',
             'have_existing_scholarship' => null,
             'othersInput' => null,
