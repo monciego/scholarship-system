@@ -32,11 +32,7 @@ const filteredRecommendations = computed(() =>
             "
             class="flex flex-col bg-white rounded-2xl shadow-xl"
             :class="
-                (scholarship.slot <= scholarship.application_form.length &&
-                    scholarship.scholarshipType === 'government scholarship' &&
-                    'border-red-700 border-4') ||
-                (scholarship.status === 'onHold' &&
-                    'border-yellow-700 border-4')
+                scholarship.status === 'onHold' && 'border-yellow-700 border-4'
             "
         >
             <div class="flex-1 relative pt-16 px-6 pb-4 md:px-8">
@@ -48,15 +44,6 @@ const filteredRecommendations = computed(() =>
                 </div>
                 <div
                     class="absolute top-0 p-4 inline-block bg-indigo-600 rounded-xl shadow-lg transform -translate-y-1/2"
-                    :class="
-                        scholarship.slot <=
-                            scholarship.application_form.length &&
-                        (scholarship.scholarshipType ===
-                            'academic scholarship' ||
-                            scholarship.scholarshipType ===
-                                'government scholarship') &&
-                        'bg-red-600'
-                    "
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +121,7 @@ const filteredRecommendations = computed(() =>
             <div
                 class="p-6 pt-0 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8"
             >
-                <button
+                <!--                 <button
                     v-if="
                         scholarship.slot <=
                             scholarship.application_form.length &&
@@ -144,9 +131,9 @@ const filteredRecommendations = computed(() =>
                     class="inline-flex items-center px-6 py-2 sm:py-3 border border-transparent text-sm sm:text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 >
                     Full
-                </button>
+                </button> -->
                 <button
-                    v-else-if="scholarship.status === 'onHold'"
+                    v-if="scholarship.status === 'onHold'"
                     type="button"
                     class="inline-flex items-center px-6 py-2 sm:py-3 border border-transparent text-sm sm:text-base leading-4 font-medium rounded-md cursor-not-allowed shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                 >
