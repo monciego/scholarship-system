@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Announcement;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -21,8 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (Schema::hasTable('announcements')) {
             $announcements = Announcement::all();
-
             Inertia::share('announcements', $announcements);
+        }
     }
 }
