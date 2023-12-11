@@ -6,6 +6,7 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import DropDownNotification from "./DropDownNotification.vue";
 const showingNavigationDropdown = ref(false);
+import { Link } from "@inertiajs/vue3";
 defineProps(["announcements"]);
 </script>
 
@@ -133,14 +134,14 @@ defineProps(["announcements"]);
                 </button>
             </div>
 
-            <div class="flex-shrink-0 flex items-center px-4">
+            <Link href="/" class="flex-shrink-0 flex items-center px-4">
                 <img
                     class="h-8 w-auto"
                     src="https://upload.wikimedia.org/wikipedia/en/7/75/Pangasinan_State_University_logo.png"
                     alt="PSU Logo"
                 />
                 <span class="ml-4 text-white font-semibold">PSU</span>
-            </div>
+            </Link>
             <div class="mt-5 flex-1 h-0 overflow-y-auto">
                 <nav class="px-2 space-y-1">
                     <ResponsiveNavLink
