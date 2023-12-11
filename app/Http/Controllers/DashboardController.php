@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Phpml\Classification\KNearestNeighbors;
+use Phpml\CrossValidation\RandomSplit;
 use Phpml\Dataset\ArrayDataset;
 use Phpml\FeatureExtraction\TfIdfTransformer;
 use Phpml\FeatureExtraction\TfIdfVectorizer;
@@ -100,3 +101,56 @@ class DashboardController extends Controller
         };
     }
 }
+
+
+
+/* Accuracy */
+
+/***
+$csvFilePath = __DIR__ . '/dataset.csv';
+$csv = Reader::createFromPath($csvFilePath, 'r');
+$data = $csv->getRecords();
+$csv->setHeaderOffset(0);
+$headers = $csv->getHeader(); // Get header names if needed
+
+$data = iterator_to_array($data);
+
+$samples = [];
+$labels = [];
+
+foreach ($data as $row) {
+    // Ensure that the following line corresponds to the structure of your CSV
+    $samples[] = array_slice($row, 0, -1);
+    $labels[] = end($row);
+}
+
+// Convert arrays to Dataset objects
+$dataset = new ArrayDataset($samples, $labels);
+
+$iterations = 1; // Since we are specifically interested in k=1
+
+for ($i = 0; $i < $iterations; $i++) {
+    // Split the dataset into training and testing sets
+    $split = new RandomSplit($dataset, .99); // Adjust the second parameter for the desired split ratio
+    $trainingSamples = $split->getTrainSamples();
+    $testingSamples = $split->getTestSamples();
+    $trainingLabels = $split->getTrainLabels();
+    $testingLabels = $split->getTestLabels();
+
+    // Train the classifier on the training set
+    $classification = new KNearestNeighbors(4); // Set k=1
+    $classification->train($trainingSamples, $trainingLabels);
+
+    // Predict labels for the testing set
+    $predictions = $classification->predict($testingSamples);
+
+    // Count the number of correct predictions for k=1
+    $correctPredictions = array_intersect_assoc($predictions, $testingLabels);
+    $numCorrectPredictions = count($correctPredictions);
+
+    $totalInstances = count($testingLabels);
+    $accuracy = ( $numCorrectPredictions / $totalInstances) * 100;
+
+    dd("Accuracy for k=1: " . $accuracy . '%, Correct Predictions: ' . $numCorrectPredictions . ', Total Instances: ' . $totalInstances);
+}
+*/
