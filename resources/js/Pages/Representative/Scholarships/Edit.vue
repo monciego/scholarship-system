@@ -208,7 +208,7 @@ const removeRequirement = (index) => {
                         </div>
 
                         <div
-                            class="sm:col-span-3"
+                            class="sm:col-span-3 hidden"
                             v-if="
                                 form.scholarshipType !==
                                     'private scholarship' &&
