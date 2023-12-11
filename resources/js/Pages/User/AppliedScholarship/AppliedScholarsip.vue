@@ -34,7 +34,10 @@ defineProps(["applicants"]);
             </Link>
         </div>
 
-        <div class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div
+            v-else
+            class="mt-6 relative overflow-x-auto shadow-md sm:rounded-lg"
+        >
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-indigo-50">
                     <tr>
@@ -51,9 +54,6 @@ defineProps(["applicants"]);
                         :key="index"
                         class="bg-white border-b"
                     >
-                        <!--  {{
-                            applicant
-                        }} -->
                         <th
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
