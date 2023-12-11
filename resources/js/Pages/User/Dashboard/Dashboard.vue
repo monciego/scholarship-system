@@ -92,6 +92,7 @@ const greeting = computed(() => {
                 >
                     <ScholarshipCard
                         :scholarships="scholarshipRecommendations"
+                        :filteredScholarships="filteredScholarships"
                     />
                 </div>
             </div>

@@ -67,9 +67,18 @@ class DashboardController extends Controller
 
 
             if($prediction === 'Government') {
-                $scholarshipRecommendations = Scholarship::with('representative')->where('scholarshipType', "government scholarship")->latest()->get();
+                $scholarshipRecommendations = Scholarship::with('representative')
+                ->where('scholarshipType', "government scholarship")
+                ->where('status', '!=', 'notAvailable')
+                ->latest()
+                ->get();
             } else {
-                $scholarshipRecommendations = Scholarship::with('representative')->where('scholarshipType', "private scholarship")->latest()->get();
+                $scholarshipRecommendations = Scholarship::with('representative')
+                ->where('scholarshipType', 'private scholarship')
+                ->where('status', '!=', 'notAvailable')
+                ->latest()
+                ->get();
+
             }
 
             return Inertia::render('User/Dashboard/Dashboard', compact('userData', 'scholarshipRecommendations', 'existing_scholarships', 'announcements'));
